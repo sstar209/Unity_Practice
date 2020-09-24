@@ -5,6 +5,9 @@ using System.Collections;
 
 public class TouchCtrl : MonoBehaviour
 {
+    //조작한 방향값이 변경되면 플레이어에게 전달하기 위해 필요
+    public HeroMove player;
+
     //TouchCtrl 오브젝트의 RectTransform 객체 선언
     RectTransform touchCtrl;
     private int touchID = -1;
@@ -14,7 +17,7 @@ public class TouchCtrl : MonoBehaviour
 
     //컨트롤러가 움직일 수 있는 반지름
     //값이 커질수록 드래그할 수 있는 반경이 커짐
-    public float dragRadius = 50f;
+    public float dragRadius = 30f;
 
     private bool btnPressed = false;
 
@@ -135,5 +138,10 @@ public class TouchCtrl : MonoBehaviour
         Vector2 diff = touchPosXY - startPos;
         Vector2 normDiff = new Vector2(diff.x / dragRadius, diff.y / dragRadius);
        
+        if(player != null)
+        {
+            //HeroMove.cs 스크립트 안에 있는 OnTouchValueChanged() 메소드 호출
+            player.OnTouchValueChanged(normDiff);
+        }
     }
 }
