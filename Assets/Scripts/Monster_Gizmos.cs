@@ -13,6 +13,7 @@ public class Monster_Gizmos : MonoBehaviour
     public void OnDrawGizmos()
     {
         Gizmos.color = color1;
+
         Gizmos.DrawSphere(transform.position, Gizmo_Radius);
     }
 }
