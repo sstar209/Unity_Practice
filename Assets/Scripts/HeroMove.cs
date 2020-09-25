@@ -26,7 +26,7 @@ public class HeroMove : MonoBehaviour
         mAvatar = GetComponent<Animator>();
     }
 
-    public void OnMissileDown()
+    public void OnMissileShootDown()
     {
         //추후 파티클 효과 필요 시 사용
     }

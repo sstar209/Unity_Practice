@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2094744095950064471}
   - component: {fileID: 2380552770052230651}
   - component: {fileID: 4153298059674429188}
+  - component: {fileID: 5382361927919189952}
   m_Layer: 0
   m_Name: Hero_Missile
   m_TagString: Untagged
@@ -93,3 +94,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5382361927919189952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421731363042122825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd98c24e3b3c7741a32107c8f2f7223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missile_speed: 100
