@@ -11,6 +11,7 @@ public class Monster_Move : MonoBehaviour
     public NavMeshAgent Monster_Agent;
     public Animator animator;
     public Vector3 targetPosition;
+    public bool isPatrolling;
 
     void Start()
     {
@@ -34,6 +35,10 @@ public class Monster_Move : MonoBehaviour
 
     void Update()
     {
+        //추적모드일 경우 함수를 벗어난다.
+        if (!isPatrolling) return;
+
+        //순찰모드일 경우에만 이하 구문이 실행된다.
         if(Monster_Agent.remainingDistance <= 0.5f)
         {
             nextPoint = ++nextPoint % movePoints.Count;
