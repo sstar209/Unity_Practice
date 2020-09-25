@@ -8,6 +8,7 @@ public class Missile_Move : MonoBehaviour
 
     void Start()
     {
+        //Prefabs 미사일에 Rigidbody가 있어야 작동이 된다!!
         GetComponent<Rigidbody>().AddForce(transform.forward * missile_speed);    
     }
 
