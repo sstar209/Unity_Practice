@@ -28,7 +28,8 @@ public class HeroMove : MonoBehaviour
 
     public void OnMissileShootDown()
     {
-        //추후 파티클 효과 필요 시 사용
+        //미사일 발사시 발사 모션 진행
+        mAvatar.SetTrigger("Fire");
     }
 
     public void OnMissileShootUp()
