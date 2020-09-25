@@ -4,8 +4,14 @@ using System.Collections;
 
 public class HeroMove : MonoBehaviour
 {
+    bool jumping;
+    float lastTime;
+
     float h, v;
     float speed = 3.0f;
+
+    public Transform missile_pos;
+    public GameObject Hero_Missile;
 
     Animator mAvatar;
 
@@ -18,6 +24,16 @@ public class HeroMove : MonoBehaviour
     void Start()
     {
         mAvatar = GetComponent<Animator>();
+    }
+
+    public void OnMissileDown()
+    {
+        //추후 파티클 효과 필요 시 사용
+    }
+
+    public void OnMissileShootUp()
+    {
+        Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);
     }
 
     void Update()
