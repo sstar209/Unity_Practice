@@ -4,16 +4,17 @@ using System.Collections;
 
 public class HeroMove : MonoBehaviour
 {
-    bool jumping;
-    float lastTime;
-
     float h, v;
     float speed = 3.0f;
+
+    float jumpPower = 5.0f;
+    bool jumping;
 
     public Transform missile_pos;
     public GameObject Hero_Missile;
 
     Animator mAvatar;
+    Rigidbody rb;
 
     public void OnTouchValueChanged(Vector2 stickPos)
     {
@@ -24,6 +25,7 @@ public class HeroMove : MonoBehaviour
     void Start()
     {
         mAvatar = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void OnMissileShootDown()
@@ -46,5 +48,30 @@ public class HeroMove : MonoBehaviour
             transform.Rotate(0, h, 0);
             transform.Translate(0, 0, v * speed * Time.deltaTime);
         }
+
+        Jump();
+
+        if(this.transform.position.y < -5.0f)
+        {
+            this.transform.position = new Vector3(0, 3.0f, 0);
+        }
     }
+
+    public void OnJumpBtnDown()
+    {
+        //플레이어가 지면에 닿아있을대만 점프할 수 있도록
+        if(this.transform.position.y < 0.01f)
+        {
+            jumping = true;
+        }
+    }
+
+    void Jump()
+    {
+        if (!jumping)
+            return;
+
+        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        jumping = false;
+    }  
 }
