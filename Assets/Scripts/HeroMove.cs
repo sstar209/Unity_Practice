@@ -12,6 +12,7 @@ public class HeroMove : MonoBehaviour
 
     public Transform missile_pos;
     public GameObject Hero_Missile;
+    public GameObject missile_effect;
 
     Animator mAvatar;
     Rigidbody rb;
@@ -32,6 +33,10 @@ public class HeroMove : MonoBehaviour
     {
         //미사일 발사시 발사 모션 진행
         mAvatar.SetTrigger("Fire");
+
+        //미사일 파티클 0.5초 후 삭제되도록
+        GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
+        Destroy(imsy, 0.5f);
     }
 
     public void OnMissileShootUp()

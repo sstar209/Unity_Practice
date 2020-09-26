@@ -11389,7 +11389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685826224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0.5}
+  m_LocalPosition: {x: 0.3, y: 0.7, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1513447859}
@@ -13111,6 +13111,7 @@ MonoBehaviour:
   Monster_Agent: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   isPatrolling: 0
+  monster_Energy: 5
 --- !u!136 &1921234403
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13491,6 +13492,7 @@ MonoBehaviour:
   missile_pos: {fileID: 1685826225}
   Hero_Missile: {fileID: 5421731363042122825, guid: 8580354c78230a34caee701480cc2fc5,
     type: 3}
+  missile_effect: {fileID: 100000, guid: 4560e456c4ec0d3418fffd368dd1e7ff, type: 3}
 --- !u!54 &1976283702
 Rigidbody:
   m_ObjectHideFlags: 0
