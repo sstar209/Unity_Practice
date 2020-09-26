@@ -110,20 +110,28 @@ public class Monster_Move : MonoBehaviour
         }
     }
 
-    //몬스터가 미사일을 5번 맞았을 시 0.0초 후에 몬스터를 없애도록 한다.
+    //몬스터가 미사일을 맞았을 시 체력이 1씩 감소
+    //몬스터가 체력을 다할 경우 몬스터는 false가 되며 3초 후 spawnMonster 함수 발동
     void OnCollisionEnter(Collision coll)
     {
-        if(monster_Energy > 0)
+        if (coll.collider.CompareTag("MISSILE"))
         {
-            if (coll.collider.CompareTag("MISSILE"))
-            {
-                monster_Energy -= 1;
-            }
+            monster_Energy -= 1;
         }
+        else return;
 
         if(monster_Energy <= 0)
         {
-            Destroy(this.gameObject, 0.0f);
-        }      
+            this.gameObject.SetActive(false);
+            Invoke("SpawnMonster", 3f);         
+            //Invoke 시간 지연 함수
+        }
+    }
+
+    void SpawnMonster()
+    {
+        monster_Energy = 5;
+        this.transform.position = new Vector3(Random.Range(-1.0f, 1.0f), 0.5f, Random.Range(0, 1));
+        this.gameObject.SetActive(true);
     }
 }
