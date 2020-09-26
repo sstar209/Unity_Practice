@@ -108,4 +108,13 @@ public class Monster_Move : MonoBehaviour
             MoveMonster();
         }
     }
+
+    //미사일과 몬스터가 충돌 시 0.0초 후에 미사일을 없애도록 한다.
+    void OnCollisionEnter(Collision coll)
+    {
+        if(coll.collider.CompareTag("MISSILE"))
+        {
+            Destroy(this.gameObject, 0.0f);
+        }
+    }
 }
