@@ -13,6 +13,7 @@ public class Monster_Move : MonoBehaviour
     public NavMeshAgent Monster_Agent;
     public Vector3 targetPosition;
     public bool isPatrolling;
+    public int monster_Energy = 5;
 
     void OnEnable()
     {
@@ -109,12 +110,20 @@ public class Monster_Move : MonoBehaviour
         }
     }
 
-    //미사일과 몬스터가 충돌 시 0.0초 후에 미사일을 없애도록 한다.
+    //몬스터가 미사일을 5번 맞았을 시 0.0초 후에 몬스터를 없애도록 한다.
     void OnCollisionEnter(Collision coll)
     {
-        if(coll.collider.CompareTag("MISSILE"))
+        if(monster_Energy > 0)
+        {
+            if (coll.collider.CompareTag("MISSILE"))
+            {
+                monster_Energy -= 1;
+            }
+        }
+
+        if(monster_Energy <= 0)
         {
             Destroy(this.gameObject, 0.0f);
-        }
+        }      
     }
 }
