@@ -16,6 +16,7 @@ public class HeroMove : MonoBehaviour
 
     Animator mAvatar;
     Rigidbody rb;
+    AudioSource shootSound;
 
     public void OnTouchValueChanged(Vector2 stickPos)
     {
@@ -27,6 +28,7 @@ public class HeroMove : MonoBehaviour
     {
         mAvatar = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        shootSound = GetComponent<AudioSource>();
     }
 
     public void OnMissileShootDown()
@@ -37,6 +39,9 @@ public class HeroMove : MonoBehaviour
         //미사일 파티클 0.5초 후 삭제되도록
         GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
         Destroy(imsy, 0.5f);
+
+        //공격 시 효과음 재생
+        shootSound.Play();
     }
 
     public void OnMissileShootUp()
