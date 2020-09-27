@@ -63,6 +63,9 @@ public class Monster_Move2 : MonoBehaviour
         if(monster_Energy <= 0)
         {
             Destroy(this.gameObject);
+
+            //적 죽일 시 1점씩 획득
+            GameManager.instance.AddScore(1);
         }
     }
 }

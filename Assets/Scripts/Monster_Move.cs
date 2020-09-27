@@ -123,7 +123,7 @@ public class Monster_Move : MonoBehaviour
         if(monster_Energy <= 0)
         {
             this.gameObject.SetActive(false);
-            Invoke("SpawnMonster", 3f);         
+            Invoke("SpawnMonster", 3f);
             //Invoke 시간 지연 함수
         }
     }

@@ -41,6 +41,7 @@ public class HeroMove : MonoBehaviour
         Destroy(imsy, 0.5f);
 
         //공격 시 효과음 재생
+
         shootSound.Play();
     }
 
