@@ -16,7 +16,10 @@ public class HeroMove : MonoBehaviour
 
     Animator mAvatar;
     Rigidbody rb;
-    AudioSource shootSound;
+    public AudioSource playerSound;
+
+    public AudioClip shootSound;
+    public AudioClip jumpSound;
 
     public void OnTouchValueChanged(Vector2 stickPos)
     {
@@ -28,7 +31,7 @@ public class HeroMove : MonoBehaviour
     {
         mAvatar = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        shootSound = GetComponent<AudioSource>();
+        //playerSound = GetComponent<AudioSource>();
     }
 
     public void OnMissileShootDown()
@@ -41,8 +44,7 @@ public class HeroMove : MonoBehaviour
         Destroy(imsy, 0.5f);
 
         //공격 시 효과음 재생
-
-        shootSound.Play();
+        playerSound.PlayOneShot(shootSound);
     }
 
     public void OnMissileShootUp()
@@ -75,6 +77,8 @@ public class HeroMove : MonoBehaviour
         {
             jumping = true;
         }
+
+        playerSound.PlayOneShot(jumpSound);
     }
 
     void Jump()
