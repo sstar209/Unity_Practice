@@ -10,6 +10,10 @@ public class HeroEnergy : MonoBehaviour
 
     private float maxHp = 100;  //최대 체력
     private float curHp = 100;  //현재 체력
+
+    public AudioSource playerSound;
+    public AudioClip damageSound;
+    public AudioClip deathSound;
     
     //게임 시작 시 HP 꽉 채워서
     void Start()
@@ -25,10 +29,12 @@ public class HeroEnergy : MonoBehaviour
             if(curHp > 0)
             {
                 curHp -= 10;
+                playerSound.PlayOneShot(damageSound);
             }
             else
             {
                 curHp = 0;
+                playerSound.PlayOneShot(deathSound);
             }
 
             HandleHp();
@@ -38,6 +44,6 @@ public class HeroEnergy : MonoBehaviour
     //Mathf.Lerp(float A, float B, float t) -> A와 B사이의 t만큼의 값을 반환
     private void HandleHp()
     {
-        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 10);
+        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 45);
     }
 }

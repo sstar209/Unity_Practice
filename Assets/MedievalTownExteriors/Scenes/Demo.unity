@@ -16062,6 +16062,9 @@ MonoBehaviour:
   Hero_Missile: {fileID: 5421731363042122825, guid: 8580354c78230a34caee701480cc2fc5,
     type: 3}
   missile_effect: {fileID: 100000, guid: 4560e456c4ec0d3418fffd368dd1e7ff, type: 3}
+  playerSound: {fileID: 1976283705}
+  shootSound: {fileID: 8300000, guid: 85a71a2be2bf9f84dae23cd4f9aa9658, type: 3}
+  jumpSound: {fileID: 8300000, guid: 2a74e5480f652e44b9d5c65e8211525f, type: 3}
 --- !u!54 &1976283702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16101,7 +16104,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 85a71a2be2bf9f84dae23cd4f9aa9658, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

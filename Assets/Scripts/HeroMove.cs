@@ -31,7 +31,6 @@ public class HeroMove : MonoBehaviour
     {
         mAvatar = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        //playerSound = GetComponent<AudioSource>();
     }
 
     public void OnMissileShootDown()

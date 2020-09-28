@@ -51,9 +51,9 @@ public class Monster_Move2 : MonoBehaviour
         Monster_Agent.isStopped = false;
     }
 
-    //몬스터가 미사일을 맞았을 시 체력이 1씩 감소
     void OnCollisionEnter(Collision coll)
     {
+        //몬스터가 미사일을 맞았을 시 체력이 1씩 감소
         if (coll.collider.CompareTag("MISSILE"))
         {
             monster_Energy -= 1;
