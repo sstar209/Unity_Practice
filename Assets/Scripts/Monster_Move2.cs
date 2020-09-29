@@ -57,6 +57,8 @@ public class Monster_Move2 : MonoBehaviour
         if (coll.collider.CompareTag("MISSILE"))
         {
             monster_Energy -= 1;
+
+            animator.SetTrigger("Damage");
         }
         else return;
 
@@ -67,5 +69,13 @@ public class Monster_Move2 : MonoBehaviour
             //적 죽일 시 1점씩 획득
             GameManager.instance.AddScore(1);
         }
+
+    }
+
+    void Update()
+    {
+        animator.SetTrigger("Move");
+
+        
     }
 }

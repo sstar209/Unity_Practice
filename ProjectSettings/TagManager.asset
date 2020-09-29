@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MISSILE
   - RABBIT
+  - STATUE
   layers:
   - Default
   - TransparentFX
