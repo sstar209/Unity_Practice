@@ -41,7 +41,7 @@ public class HeroEnergy : MonoBehaviour
         }
     }
 
-    //Mathf.Lerp(float A, float B, float t) -> A와 B사이의 t만큼의 값을 반환
+    //선형보간 Mathf.Lerp(float A, float B, float t) -> A와 B사이의 t만큼의 값을 반환
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 45);

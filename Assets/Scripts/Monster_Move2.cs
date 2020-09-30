@@ -26,7 +26,7 @@ public class Monster_Move2 : MonoBehaviour
             yield return wfs;
 
             Monster_Agent.autoBraking = true;
-            Monster_Agent.speed = 1.2f;
+            Monster_Agent.speed = 2.2f;
             ApproachTarget(heroTr.position);
         }
     }
@@ -34,7 +34,7 @@ public class Monster_Move2 : MonoBehaviour
     void Start()
     {
         Debug.Log("Start");
-        var player = GameObject.FindGameObjectWithTag("Player");
+        var player = GameObject.FindGameObjectWithTag("STATUE");
         heroTr = player.GetComponent<Transform>();
         wfs = new WaitForSeconds(0.4f);
         Monster_Agent = GetComponent<NavMeshAgent>();
@@ -57,8 +57,6 @@ public class Monster_Move2 : MonoBehaviour
         if (coll.collider.CompareTag("MISSILE"))
         {
             monster_Energy -= 1;
-
-            animator.SetTrigger("Damage");
         }
         else return;
 
@@ -72,10 +70,5 @@ public class Monster_Move2 : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        animator.SetTrigger("Move");
-
-        
-    }
 }
+
