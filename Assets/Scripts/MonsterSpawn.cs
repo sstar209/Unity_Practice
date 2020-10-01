@@ -10,6 +10,11 @@ public class MonsterSpawn : MonoBehaviour
 
     void Start()
     {
+        GameManager.instance.onPlay += PlayGame;
+    }
+
+    void PlayGame()
+    {
         //timeGap(3초)만큼 시간이 지난 후 최초로 SpawnMonster 함수를 호출하고
         //시간이 timeGap만큼 지날 떄마다 반복 호출
 

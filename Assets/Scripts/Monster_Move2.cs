@@ -33,14 +33,18 @@ public class Monster_Move2 : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start");
-        var player = GameObject.FindGameObjectWithTag("STATUE");
-        heroTr = player.GetComponent<Transform>();
-        wfs = new WaitForSeconds(0.4f);
-        Monster_Agent = GetComponent<NavMeshAgent>();
-        Monster_Agent.autoBraking = false;
-        animator = GetComponent<Animator>();
-        Monster_Agent.speed = 1.3f;
+        if(GameManager.instance.isPlay)
+        {
+            Debug.Log("Start");
+            var statue = GameObject.FindGameObjectWithTag("STATUE");
+            heroTr = statue.GetComponent<Transform>();
+
+            wfs = new WaitForSeconds(0.4f);
+            Monster_Agent = GetComponent<NavMeshAgent>();
+            Monster_Agent.autoBraking = false;
+            animator = GetComponent<Animator>();
+            Monster_Agent.speed = 2.2f;
+        }
     }
 
     //플레이어의 위치를 매개변수로 받아 몬스터의 목표 위치를 플레이어 위치로 선정하는 함수
@@ -57,6 +61,8 @@ public class Monster_Move2 : MonoBehaviour
         if (coll.collider.CompareTag("MISSILE"))
         {
             monster_Energy -= 1;
+            var player = GameObject.FindGameObjectWithTag("Player");
+            heroTr = player.GetComponent<Transform>();
         }
         else return;
 

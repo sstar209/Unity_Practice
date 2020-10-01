@@ -14,13 +14,13 @@ public class StatueEnergy : MonoBehaviour
 
     void Start()
     {
-        hpBar.value = (float)curHp / (float)maxHp;    
+        hpBar.value = (float)curHp / (float)maxHp;
     }
 
     private void OnCollisionStay(Collision coll3)
     {
-        
-        if(coll3.collider.CompareTag("RABBIT"))
+
+        if (coll3.collider.CompareTag("RABBIT"))
         {
             if (curHp > 0)
             {
@@ -29,10 +29,11 @@ public class StatueEnergy : MonoBehaviour
             else
             {
                 curHp = 0;
+                GameManager.instance.GameOver();
             }
 
         }
-        
+
         HandleHp();
     }
 

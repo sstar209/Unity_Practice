@@ -35,6 +35,6 @@ public class EnemyEnergy : MonoBehaviour
 
     private void HandleHp()
     {
-        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 10);
+        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 45);
     }
 }

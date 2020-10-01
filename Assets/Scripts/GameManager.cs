@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     private int score = 0;
 
+    public delegate void OnPlay();
+    public OnPlay onPlay;
+
+    public bool isPlay = false;
+    public GameObject playBtn;
+
     void Awake()
     {
         if (!instance) instance = this;
@@ -21,4 +27,19 @@ public class GameManager : MonoBehaviour
         score += num;
         scoreText.text = "Score : " + score;
     }
-}
+
+    public void PlayBtnCilck()
+    {
+        playBtn.SetActive(false);
+        isPlay = true;
+        onPlay.Invoke();
+    }
+
+    public void GameOver()
+    {
+        playBtn.SetActive(true);
+        isPlay = false;
+        onPlay.Invoke();
+    }
+
+} 

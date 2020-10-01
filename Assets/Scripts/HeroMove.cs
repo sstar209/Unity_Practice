@@ -35,49 +35,61 @@ public class HeroMove : MonoBehaviour
 
     public void OnMissileShootDown()
     {
-        //미사일 발사시 발사 모션 진행
-        mAvatar.SetTrigger("Fire");
+        if(GameManager.instance.isPlay)
+        {
+            //미사일 발사시 발사 모션 진행
+            mAvatar.SetTrigger("Fire");
 
-        //미사일 파티클 0.5초 후 삭제되도록
-        GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
-        Destroy(imsy, 0.5f);
+            //미사일 파티클 0.5초 후 삭제되도록
+            GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
+            Destroy(imsy, 0.5f);
 
-        //공격 시 효과음 재생
-        playerSound.PlayOneShot(shootSound);
+            //공격 시 효과음 재생
+            playerSound.PlayOneShot(shootSound);
+        }
     }
 
     public void OnMissileShootUp()
     {
-        Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);
+        if(GameManager.instance.isPlay)
+        {
+            Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);
+        }
     }
 
     void Update()
     {
-        mAvatar.SetFloat("Speed", (h * h + v * v));
-
-        if(h != 0f && v != 0f)
+        if(GameManager.instance.isPlay)
         {
-            transform.Rotate(0, h, 0);
-            transform.Translate(0, 0, v * speed * Time.deltaTime);
-        }
+            mAvatar.SetFloat("Speed", (h * h + v * v));
 
-        Jump();
+            if (h != 0f && v != 0f)
+            {
+                transform.Rotate(0, h, 0);
+                transform.Translate(0, 0, v * speed * Time.deltaTime);
+            }
 
-        if(this.transform.position.y < -5.0f)
-        {
-            this.transform.position = new Vector3(0, 3.0f, 0);
+            Jump();
+
+            if (this.transform.position.y < -5.0f)
+            {
+                this.transform.position = new Vector3(0, 3.0f, 0);
+            }
         }
     }
 
     public void OnJumpBtnDown()
     {
-        //플레이어가 지면에 닿아있을대만 점프할 수 있도록
-        if(this.transform.position.y < 0.01f)
+        if(GameManager.instance.isPlay)
         {
-            jumping = true;
-        }
+            //플레이어가 지면에 닿아있을대만 점프할 수 있도록
+            if (this.transform.position.y < 0.01f)
+            {
+                jumping = true;
+            }
 
-        playerSound.PlayOneShot(jumpSound);
+            playerSound.PlayOneShot(jumpSound);
+        }
     }
 
     void Jump()
