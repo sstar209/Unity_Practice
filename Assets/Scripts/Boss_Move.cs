@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Monster_Move2 : MonoBehaviour
-{  
+public class Boss_Move : MonoBehaviour
+{
     public Transform heroTr;
     private WaitForSeconds wfs;
     public NavMeshAgent Monster_Agent;
     public Vector3 targetPosition;
     public Animator animator;
     public int monster_Energy = 5;
+
+    private int hashWalk = Animator.StringToHash("Walk");
+    private int hashFinish = Animator.StringToHash("isFinsish");
 
     void OnEnable()
     {
@@ -21,7 +24,7 @@ public class Monster_Move2 : MonoBehaviour
 
     IEnumerator CheckMonster()
     {
-        while(true)
+        while (true)
         {
             yield return wfs;
 
@@ -32,19 +35,17 @@ public class Monster_Move2 : MonoBehaviour
     }
 
     void Start()
-    {
-        if(GameManager.instance.isPlay)
-        {
-            Debug.Log("Start");
-            var statue = GameObject.FindGameObjectWithTag("STATUE");
-            heroTr = statue.GetComponent<Transform>();
+    {    
+        Debug.Log("Start");
+        var statue = GameObject.FindGameObjectWithTag("STATUE");
+        heroTr = statue.GetComponent<Transform>();
 
-            wfs = new WaitForSeconds(0.4f);
-            Monster_Agent = GetComponent<NavMeshAgent>();
-            Monster_Agent.autoBraking = false;
-            animator = GetComponent<Animator>();
-            Monster_Agent.speed = 2.2f;
-        }
+        wfs = new WaitForSeconds(0.4f);
+        Monster_Agent = GetComponent<NavMeshAgent>();
+        Monster_Agent.autoBraking = false;
+        animator = GetComponent<Animator>();
+        Monster_Agent.speed = 2.2f;
+
     }
 
     //플레이어의 위치를 매개변수로 받아 몬스터의 목표 위치를 플레이어 위치로 선정하는 함수
@@ -53,7 +54,21 @@ public class Monster_Move2 : MonoBehaviour
         if (Monster_Agent.isPathStale) return;
         Monster_Agent.destination = pos;
         Monster_Agent.isStopped = false;
+        animator.SetTrigger(hashWalk);
     }
+
+    /*
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("STATUE"))
+        {
+            Monster_Agent.isStopped = true;
+            Monster_Agent.speed = 0;
+            animator.SetTrigger(hashFinish);
+        }
+    }
+    */
+
 
     void OnCollisionEnter(Collision coll)
     {
@@ -66,13 +81,20 @@ public class Monster_Move2 : MonoBehaviour
         }
         else return;
 
-        if(monster_Energy <= 0)
-        {  
+        if (coll.collider.CompareTag("STATUE"))
+        {
+            Monster_Agent.isStopped = true;
+            Monster_Agent.speed = 0;
+            animator.SetTrigger(hashFinish);
+        }
+
+        if (monster_Energy <= 0)
+        {
             Destroy(this.gameObject);
 
-             //적 죽일 시 1점씩 획득
-            GameManager.instance.AddScore(1);        
+            //적 죽일 시 1점씩 획득
+            GameManager.instance.AddScore(1);
         }
     }
-}
 
+}

@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     {
         score += num;
         scoreText.text = "Score : " + score;
+
+        if( score > 3)
+        {
+            GameOver();
+        }
     }
 
     public void PlayBtnCilck()
