@@ -5,7 +5,7 @@ using System.Collections;
 public class HeroMove : MonoBehaviour
 {
     float h, v;
-    float speed = 3.0f;
+    float speed = 5.0f;
 
     float jumpPower = 5.0f;
     bool jumping;
@@ -99,5 +99,23 @@ public class HeroMove : MonoBehaviour
 
         rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         jumping = false;
-    }  
+    }
+
+    //적과 충돌 시 위로 붕뜨는 현상 방지
+
+    void OnCollisionEnter(Collision coll1)
+    {
+        if(coll1.collider.CompareTag("RABBIT"))
+        {
+            this.rb.mass += 2;
+        }
+    }
+
+    void OnCollisionExit(Collision coll2)
+    {
+        if (coll2.collider.CompareTag("RABBIT"))
+        {
+            this.rb.mass = 1;
+        }
+    }
 }

@@ -57,18 +57,6 @@ public class Boss_Move : MonoBehaviour
         animator.SetTrigger(hashWalk);
     }
 
-    /*
-    void OnTriggerEnter(Collider coll)
-    {
-        if (coll.CompareTag("STATUE"))
-        {
-            Monster_Agent.isStopped = true;
-            Monster_Agent.speed = 0;
-            animator.SetTrigger(hashFinish);
-        }
-    }
-    */
-
 
     void OnCollisionEnter(Collision coll)
     {
