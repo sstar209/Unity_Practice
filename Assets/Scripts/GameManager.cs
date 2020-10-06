@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     //어디서나 접근할 수 있도록 static(정적)으로 선언
 
     public Text scoreText;
-    private int score = 0;
+    public int score = 0;           //적을 죽인 횟수
+    public int pickUpStar = 0;      //별을 먹은 갯수
 
     public delegate void OnPlay();
     public OnPlay onPlay;
@@ -29,8 +30,13 @@ public class GameManager : MonoBehaviour
 
         if( score > 3)
         {
-            GameOver();
+            //GameOver();
         }
+    }
+
+    public void AddStar(int num2)
+    {
+        pickUpStar += num2;
     }
 
     public void PlayBtnCilck()

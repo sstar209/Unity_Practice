@@ -16,7 +16,6 @@ public class Monster_Move2 : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(CheckMonster());
-        Debug.Log("OnEnable");
     }
 
     IEnumerator CheckMonster()
@@ -35,7 +34,6 @@ public class Monster_Move2 : MonoBehaviour
     {
         if(GameManager.instance.isPlay)
         {
-            Debug.Log("Start");
             var statue = GameObject.FindGameObjectWithTag("STATUE");
             heroTr = statue.GetComponent<Transform>();
 
@@ -64,7 +62,6 @@ public class Monster_Move2 : MonoBehaviour
             var player = GameObject.FindGameObjectWithTag("Player");
             heroTr = player.GetComponent<Transform>();
         }
-        else return;
 
         if(monster_Energy <= 0)
         {  

@@ -1,25 +1,29 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroMove : MonoBehaviour
 {
     float h, v;
-    float speed = 5.0f;
+    public float speed = 5.0f;
 
-    float jumpPower = 5.0f;
-    bool jumping;
+    public byte colorNum = 255;
 
     public Transform missile_pos;
     public GameObject Hero_Missile;
     public GameObject missile_effect;
+
+    private bool colorCha;
 
     Animator mAvatar;
     Rigidbody rb;
     public AudioSource playerSound;
 
     public AudioClip shootSound;
-    public AudioClip jumpSound;
+    public AudioClip boostSound;
+
+    public Image btn;
 
     public void OnTouchValueChanged(Vector2 stickPos)
     {
@@ -69,53 +73,55 @@ public class HeroMove : MonoBehaviour
                 transform.Translate(0, 0, v * speed * Time.deltaTime);
             }
 
-            Jump();
-
             if (this.transform.position.y < -5.0f)
             {
                 this.transform.position = new Vector3(0, 3.0f, 0);
             }
-        }
-    }
 
-    public void OnJumpBtnDown()
-    {
-        if(GameManager.instance.isPlay)
-        {
-            //플레이어가 지면에 닿아있을대만 점프할 수 있도록
-            if (this.transform.position.y < 0.01f)
+            //부스터 발동 시 기본 속도가 될때까지 점점 스피드 감소
+            if (speed > 5)
             {
-                jumping = true;
+                speed -= 1.5f * Time.deltaTime;
             }
 
-            playerSound.PlayOneShot(jumpSound);
+            //쿨타임이 초기화되면 버튼의 색이 원래대로 돌아온다.
+            if(colorNum == 255)
+            {
+                btn.color = new Color32(255, 255, 255, 255);
+            }
+
+            if (colorCha)
+            {
+                colorCha = false;
+                StartCoroutine("Change");
+            }
         }
     }
 
-    void Jump()
-    {
-        if (!jumping)
-            return;
+    //colorNum == 쿨타임!
 
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        jumping = false;
+    IEnumerator Change()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        colorNum++;
+
+        if(colorNum < 255)
+        StartCoroutine("Change");
     }
 
-    //적과 충돌 시 위로 붕뜨는 현상 방지
-
-    void OnCollisionEnter(Collision coll1)
+    public void OnBoosterBtnDown()
     {
-        if(coll1.collider.CompareTag("RABBIT"))
+        if(GameManager.instance.isPlay && speed < 5.1f && colorNum == 255)
         {
-            this.rb.mass += 2;
-        }
-    }
+            colorNum = 125;
 
-    void OnCollisionExit(Collision coll2)
-    {
-        if (coll2.collider.CompareTag("RABBIT"))
-        {
-            this.rb.mass = 1;
+            colorCha = true;
+
+            speed = 12.5f;            
+            playerSound.PlayOneShot(boostSound);
+
+            btn.color = new Color32(colorNum, colorNum, colorNum, 255);
         }
-    }
+    }   
 }

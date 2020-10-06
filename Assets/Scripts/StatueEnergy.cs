@@ -17,14 +17,14 @@ public class StatueEnergy : MonoBehaviour
         hpBar.value = (float)curHp / (float)maxHp;
     }
 
-    private void OnCollisionStay(Collision coll3)
+    void OnCollisionStay(Collision coll3)
     {
 
         if (coll3.collider.CompareTag("RABBIT"))
         {
             if (curHp > 0)
             {
-                curHp -= 0.02f;
+                curHp -= 0.05f;
             }
             else
             {

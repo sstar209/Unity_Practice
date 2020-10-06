@@ -9,10 +9,8 @@ public class Boss_Move2 : MonoBehaviour
     private NavMeshAgent nv;
     public Transform targetTr;
     public int boss_Energy = 50;
-
     private WaitForSeconds wfs;
-
-    public bool isPatrolling;
+    public Vector3 targetPosition;
 
     private Animator anim;
     private int hashWalk = Animator.StringToHash("Walk");
@@ -24,8 +22,6 @@ public class Boss_Move2 : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(CheckMonster());
-
-        Debug.Log("OnEnable");
     }
 
     IEnumerator CheckMonster()
@@ -39,83 +35,100 @@ public class Boss_Move2 : MonoBehaviour
             //heroTr.position = 플레이어의 좌표
             float distance = Vector3.Distance(this.transform.position, targetTr.position);
 
-            if (distance <= 2.0)
+            if (distance <= 5.0)
             {
-                //몬스터와 플레이어 거리가 매우 가까운 상황
-                nv.speed = 0.1f;
+                //거리가 매우 가까운 상황
+                nv.speed = 0f;
                 nv.autoBraking = false;
+
+                anim.SetTrigger(hashAttack);
             }
 
-            else if (distance > 2.0 && distance <= 16.0f)
+            else if (distance > 5.0 && distance <= 16.0f)
             {
                 //추적 모드
                 nv.autoBraking = false;
-                nv.speed = 3.0f;
-                isPatrolling = false;
+                nv.speed = 4.0f;
 
-                ApproachTarget(targetTr.position);
+                anim.SetTrigger(hashRun);
+
+                ApproachTarget(targetTr.position);        
             }
 
             else
             {
                 //순찰 모드
                 nv.speed = 2.0f;
-                isPatrolling = true;
                 var statue = GameObject.FindGameObjectWithTag("STATUE");
                 targetTr = statue.GetComponent<Transform>();
-                nv.SetDestination(targetTr.position);
-            }
 
-            if (boss_Energy <= 0)
-            {
-                nv.speed = 0;
-                nv.autoBraking = false;
-                nv.isStopped = true;
-                anim.SetTrigger(hashDie);
+                anim.SetTrigger(hashWalk);
+
+                nv.SetDestination(targetTr.position);
             }
         }
     }
 
-    IEnumerator Start()
+    void Start()
     {
-        nv = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        if(GameManager.instance.isPlay)
+        {
+            nv = GetComponent<NavMeshAgent>();
+            anim = GetComponent<Animator>();
 
-        yield return new WaitForSeconds(3.0f);
+            wfs = new WaitForSeconds(0.4f);
 
-        nv.speed = 2.0f;
-        var statue = GameObject.FindGameObjectWithTag("STATUE");
-        nv.SetDestination(targetTr.position);
-        anim.SetTrigger(hashWalk);
+            nv.speed = 2.0f;
+            nv.autoBraking = false;
 
+            var statue = GameObject.FindGameObjectWithTag("STATUE");  //추적할 목표를 찾자
+            targetTr = statue.GetComponent<Transform>();              //추적할 목표를 지정
+
+            anim.SetTrigger(hashWalk);                                //걷는 애니메이션
+
+        }
     }
 
     void OnCollisionEnter(Collision coll1)
     {
+        //미사일과 접촉 시
         if (coll1.collider.CompareTag("MISSILE"))
         {
             boss_Energy -= 1;
-            anim.SetTrigger(hashRun);
             nv.isStopped = false;
             var player = GameObject.FindGameObjectWithTag("Player");
             targetTr = player.GetComponent<Transform>();
-            nv.SetDestination(targetTr.position);
         }
 
-        else if (coll1.collider.CompareTag("STATUE"))
+        //석상 접촉 시
+        if (coll1.collider.CompareTag("STATUE"))
         {
-            nv.speed = 0.1f;
+            nv.speed = 0;
             nv.autoBraking = false;
             nv.isStopped = true;
             anim.SetTrigger(hashAttack);
         }
 
-        else if (coll1.collider.CompareTag("Player"))
+        //플레이어 접촉 시
+        if(coll1.collider.CompareTag("Player"))
         {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            targetTr = player.GetComponent<Transform>();
+
+            nv.speed = 0;
+            nv.autoBraking = false;
+            nv.isStopped = true;
             anim.SetTrigger(hashAttack);
         }
 
-        else return;
+        if (boss_Energy <= 0)
+        {
+            nv.speed = 0;
+            nv.autoBraking = false;
+            nv.isStopped = true;
+            anim.SetTrigger(hashDie);
+            GameManager.instance.GameOver();
+        }
     }
 
     void ApproachTarget(Vector3 pos)

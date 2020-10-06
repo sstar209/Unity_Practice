@@ -132,8 +132,6 @@ public class TouchCtrl : MonoBehaviour
         }
 
         Vector2 touchPosXY = new Vector3(touchCtrl.position.x, touchCtrl.position.y);
-        Debug.Log(touchCtrl.position.x);
-        Debug.Log(touchCtrl.position.y);
 
         Vector2 diff = touchPosXY - startPos;
         Vector2 normDiff = new Vector2(diff.x / dragRadius, diff.y / dragRadius);

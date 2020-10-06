@@ -10,11 +10,7 @@ public class HeroEnergy : MonoBehaviour
 
     private float maxHp = 100;  //최대 체력
     private float curHp = 100;  //현재 체력
-
-    public AudioSource playerSound;
-    public AudioClip damageSound;
-    public AudioClip deathSound;
-    
+  
     //게임 시작 시 HP 꽉 채워서
     void Start()
     {
@@ -22,19 +18,19 @@ public class HeroEnergy : MonoBehaviour
     }
 
     //플레이어와 몬스터 충돌 시 Hp는 10씩 감소
-    void OnCollisionEnter(Collision coll)
+    void OnCollisionStay(Collision coll)
     {
         if(coll.collider.CompareTag("RABBIT"))
         {
             if(curHp > 0)
             {
-                curHp -= 10;
-                playerSound.PlayOneShot(damageSound);
+                curHp -= 0.5f;
             }
-            else
+          
+            if(curHp <= 0)
             {
                 curHp = 0;
-                playerSound.PlayOneShot(deathSound);
+                GameManager.instance.GameOver();
             }
 
             HandleHp();
