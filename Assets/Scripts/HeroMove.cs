@@ -8,13 +8,12 @@ public class HeroMove : MonoBehaviour
     float h, v;
     public float speed = 5.0f;
 
-    public byte colorNum = 255;
+    public byte colorNum = 255;             //부스터 버튼 색상 조절
+    private bool colorCha;                  //부스터 쿨타임
 
-    public Transform missile_pos;
-    public GameObject Hero_Missile;
-    public GameObject missile_effect;
-
-    private bool colorCha;
+    public Transform missile_pos;           //미사일의 위치
+    public GameObject Hero_Missile;         //미사일 오브젝트
+    public GameObject missile_effect;       //미사일 파티클
 
     Animator mAvatar;
     Rigidbody rb;
@@ -47,7 +46,7 @@ public class HeroMove : MonoBehaviour
             //미사일 파티클 0.5초 후 삭제되도록
             GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
             Destroy(imsy, 0.5f);
-
+         
             //공격 시 효과음 재생
             playerSound.PlayOneShot(shootSound);
         }

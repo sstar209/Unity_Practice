@@ -7,6 +7,8 @@ TagManager:
   - MISSILE
   - RABBIT
   - STATUE
+  - MUMMY
+  - BOSS
   layers:
   - Default
   - TransparentFX

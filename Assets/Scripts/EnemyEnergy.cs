@@ -20,7 +20,7 @@ public class EnemyEnergy : MonoBehaviour
     {
         if(coll2.collider.CompareTag("MISSILE"))
         {
-            if(curHp > 0)
+            if (curHp > 0)
             {
                 curHp -= 1;
             }
@@ -35,6 +35,16 @@ public class EnemyEnergy : MonoBehaviour
 
     private void HandleHp()
     {
-        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 45);
+        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
+    }
+
+    void Update()
+    {
+        if (curHp <= 0)
+        {
+            GameManager.instance.AddScore(1);
+
+            Destroy(this.gameObject);
+        }
     }
 }

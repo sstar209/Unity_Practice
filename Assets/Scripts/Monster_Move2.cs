@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Monster_Move2 : MonoBehaviour
-{  
-    public Transform heroTr;
+{
+    public Transform targetTr;
     private WaitForSeconds wfs;
     public NavMeshAgent Monster_Agent;
     public Vector3 targetPosition;
     public Animator animator;
-    public int monster_Energy = 5;
 
     void OnEnable()
     {
@@ -20,13 +19,25 @@ public class Monster_Move2 : MonoBehaviour
 
     IEnumerator CheckMonster()
     {
-        while(true)
+        while (true)
         {
             yield return wfs;
 
-            Monster_Agent.autoBraking = true;
-            Monster_Agent.speed = 2.2f;
-            ApproachTarget(heroTr.position);
+            float distance = Vector3.Distance(this.transform.position, targetTr.position);
+
+            if (distance <= 2.0)
+            {
+                //거리가 매우 가까운 상황
+                Monster_Agent.speed = 0.1f;
+                Monster_Agent.autoBraking = false;
+
+            }
+            else
+            {
+                Monster_Agent.autoBraking = true;
+                Monster_Agent.speed = 2.2f;
+                ApproachTarget(targetTr.position);
+            }
         }
     }
 
@@ -35,7 +46,7 @@ public class Monster_Move2 : MonoBehaviour
         if(GameManager.instance.isPlay)
         {
             var statue = GameObject.FindGameObjectWithTag("STATUE");
-            heroTr = statue.GetComponent<Transform>();
+            targetTr = statue.GetComponent<Transform>();
 
             wfs = new WaitForSeconds(0.4f);
             Monster_Agent = GetComponent<NavMeshAgent>();
@@ -55,20 +66,11 @@ public class Monster_Move2 : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        //몬스터가 미사일을 맞았을 시 체력이 1씩 감소
+        //몬스터가 미사일을 맞았을 시 추적타겟을 플레이어로 변경
         if (coll.collider.CompareTag("MISSILE"))
         {
-            monster_Energy -= 1;
             var player = GameObject.FindGameObjectWithTag("Player");
-            heroTr = player.GetComponent<Transform>();
-        }
-
-        if(monster_Energy <= 0)
-        {  
-            Destroy(this.gameObject);
-
-             //적 죽일 시 1점씩 획득
-            GameManager.instance.AddScore(1);        
+            targetTr = player.GetComponent<Transform>();
         }
     }
 }

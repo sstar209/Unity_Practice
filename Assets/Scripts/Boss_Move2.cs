@@ -8,7 +8,7 @@ public class Boss_Move2 : MonoBehaviour
 {
     private NavMeshAgent nv;
     public Transform targetTr;
-    public int boss_Energy = 50;
+    public int boss_Energy = 77;
     private WaitForSeconds wfs;
     public Vector3 targetPosition;
 
@@ -35,16 +35,16 @@ public class Boss_Move2 : MonoBehaviour
             //heroTr.position = 플레이어의 좌표
             float distance = Vector3.Distance(this.transform.position, targetTr.position);
 
-            if (distance <= 5.0)
+            if (distance <= 4.0)
             {
                 //거리가 매우 가까운 상황
-                nv.speed = 0f;
+                nv.speed = 0.1f;
                 nv.autoBraking = false;
 
                 anim.SetTrigger(hashAttack);
             }
 
-            else if (distance > 5.0 && distance <= 16.0f)
+            else if (distance > 4.0 && distance <= 16.0f)
             {
                 //추적 모드
                 nv.autoBraking = false;
@@ -127,7 +127,6 @@ public class Boss_Move2 : MonoBehaviour
             nv.autoBraking = false;
             nv.isStopped = true;
             anim.SetTrigger(hashDie);
-            GameManager.instance.GameOver();
         }
     }
 

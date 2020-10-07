@@ -21,7 +21,9 @@ public class PickUp : MonoBehaviour
                     inven.slots[0].isEmpty = false;
                     Destroy(this.gameObject);
 
+                    GameManager.instance.StarOneText();
                     GameManager.instance.AddStar(1);
+                    GameManager.instance.ParticlePlay();
 
                     Debug.Log("별 1개");
 
@@ -35,7 +37,9 @@ public class PickUp : MonoBehaviour
                     inven.slots[1].isEmpty = false;
                     Destroy(this.gameObject);
 
+                    GameManager.instance.StarTwoText();
                     GameManager.instance.AddStar(1);
+                    GameManager.instance.ParticlePlay();
 
                     Debug.Log("별 2개");
 
@@ -49,7 +53,9 @@ public class PickUp : MonoBehaviour
                     inven.slots[2].isEmpty = false;
                     Destroy(this.gameObject);
 
+                    GameManager.instance.StarThreeText();
                     GameManager.instance.AddStar(1);
+                    GameManager.instance.ParticlePlay();
 
                     Debug.Log("별 3개");
 
@@ -63,7 +69,9 @@ public class PickUp : MonoBehaviour
                     inven.slots[3].isEmpty = false;
                     Destroy(this.gameObject);
 
+                    GameManager.instance.StarFourText();
                     GameManager.instance.AddStar(1);
+                    GameManager.instance.ParticlePlay();
 
                     Debug.Log("별 4개");
 
@@ -77,7 +85,9 @@ public class PickUp : MonoBehaviour
                     inven.slots[4].isEmpty = false;
                     Destroy(this.gameObject);
 
+                    GameManager.instance.StarFiveText();
                     GameManager.instance.AddStar(1);
+                    GameManager.instance.ParticlePlay();
 
                     Debug.Log("별 5개");
 

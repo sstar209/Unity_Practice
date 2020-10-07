@@ -8,8 +8,8 @@ public class HeroEnergy : MonoBehaviour
     [SerializeField]
     private Slider hpBar;
 
-    private float maxHp = 100;  //최대 체력
-    private float curHp = 100;  //현재 체력
+    private float maxHp = 150;  //최대 체력
+    private float curHp = 150;  //현재 체력
   
     //게임 시작 시 HP 꽉 채워서
     void Start()
@@ -24,13 +24,39 @@ public class HeroEnergy : MonoBehaviour
         {
             if(curHp > 0)
             {
-                curHp -= 0.5f;
-            }
-          
-            if(curHp <= 0)
+                curHp -= 0.05f;
+            }          
+            else
             {
                 curHp = 0;
-                GameManager.instance.GameOver();
+            }
+
+            HandleHp();
+        }
+
+        if (coll.collider.CompareTag("MUMMY"))
+        {
+            if (curHp > 0)
+            {
+                curHp -= 0.15f;
+            }
+            else
+            {
+                curHp = 0;
+            }
+
+            HandleHp();
+        }
+
+        if (coll.collider.CompareTag("BOSS"))
+        {
+            if (curHp > 0)
+            {
+                curHp -= 2.5f;
+            }
+            else
+            {
+                curHp = 0;
             }
 
             HandleHp();
@@ -40,6 +66,14 @@ public class HeroEnergy : MonoBehaviour
     //선형보간 Mathf.Lerp(float A, float B, float t) -> A와 B사이의 t만큼의 값을 반환
     private void HandleHp()
     {
-        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 45);
+        hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
+    }
+
+    void Update()
+    {
+        if(curHp <= 0)
+        {
+            GameManager.instance.GameOver();
+        }
     }
 }

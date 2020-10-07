@@ -2825,7 +2825,7 @@ GameObject:
   - component: {fileID: 4572808531111241710}
   m_Layer: 0
   m_Name: Bull_Boss
-  m_TagString: RABBIT
+  m_TagString: BOSS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2894,7 +2894,7 @@ CapsuleCollider:
   m_Radius: 0.75
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0.25}
+  m_Center: {x: 0, y: 0.75, z: 0.5}
 --- !u!82 &8907219611949693050
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3028,10 +3028,6 @@ MonoBehaviour:
   targetTr: {fileID: 0}
   boss_Energy: 50
   targetPosition: {x: 0, y: 0, z: 0}
-  bossSound: {fileID: 8907219611949693050}
-  appearSound: {fileID: 0}
-  attackSound: {fileID: 0}
-  dieSound: {fileID: 0}
 --- !u!114 &4572808531111241710
 MonoBehaviour:
   m_ObjectHideFlags: 0
