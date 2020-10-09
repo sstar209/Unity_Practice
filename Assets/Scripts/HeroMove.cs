@@ -17,10 +17,6 @@ public class HeroMove : MonoBehaviour
 
     Animator mAvatar;
     Rigidbody rb;
-    public AudioSource playerSound;
-
-    public AudioClip shootSound;
-    public AudioClip boostSound;
 
     public Image btn;
 
@@ -38,54 +34,54 @@ public class HeroMove : MonoBehaviour
 
     public void OnMissileShootDown()
     {
-            //미사일 발사시 발사 모션 진행
-            mAvatar.SetTrigger("Fire");
+        //미사일 발사시 발사 모션 진행
+        mAvatar.SetTrigger("Fire");
 
-            //미사일 파티클 0.5초 후 삭제되도록
-            GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
-            Destroy(imsy, 0.5f);
-         
-            //공격 시 효과음 재생
-            playerSound.PlayOneShot(shootSound);       
+        //미사일 파티클 0.5초 후 삭제되도록
+        GameObject imsy = Instantiate(missile_effect, missile_pos.position, missile_pos.rotation);
+        Destroy(imsy, 0.5f);
+
+        //공격 시 효과음 재생
+        SoundManager.instance5.playerShoot();       
     }
 
     public void OnMissileShootUp()
     {
-            Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);        
+        Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);        
     }
 
     void Update()
     {
-            mAvatar.SetFloat("Speed", (h * h + v * v));
+        mAvatar.SetFloat("Speed", (h * h + v * v));
 
-            if (h != 0f && v != 0f)
-            {
-                transform.Rotate(0, h, 0);
-                transform.Translate(0, 0, v * speed * Time.deltaTime);
-            }
+        if (h != 0f && v != 0f)
+        {
+            transform.Rotate(0, h, 0);
+            transform.Translate(0, 0, v * speed * Time.deltaTime);
+        }
 
-            if (this.transform.position.y < -5.0f)
-            {
-                this.transform.position = new Vector3(0, 3.0f, 0);
-            }
+        if (this.transform.position.y < -5.0f)
+        {
+            this.transform.position = new Vector3(0, 3.0f, 0);
+        }
 
-            //부스터 발동 시 기본 속도가 될때까지 점점 스피드 감소
-            if (speed > 5)
-            {
-                speed -= 1.5f * Time.deltaTime;
-            }
+        //부스터 발동 시 기본 속도가 될때까지 점점 스피드 감소
+        if (speed > 5)
+        {
+            speed -= 1.5f * Time.deltaTime;
+        }
 
-            //쿨타임이 초기화되면 버튼의 색이 원래대로 돌아온다.
-            if(colorNum == 255)
-            {
-                btn.color = new Color32(255, 255, 255, 255);
-            }
+        //쿨타임이 초기화되면 버튼의 색이 원래대로 돌아온다.
+        if(colorNum == 255)
+        {
+            btn.color = new Color32(255, 255, 255, 255);
+        }
 
-            if (colorCha)
-            {
-                colorCha = false;
-                StartCoroutine("Change");
-            }       
+        if (colorCha)
+        {
+            colorCha = false;
+            StartCoroutine("Change");
+        }       
     }
 
     //colorNum == 쿨타임!
@@ -108,8 +104,8 @@ public class HeroMove : MonoBehaviour
 
             colorCha = true;
 
-            speed = 12.5f;            
-            playerSound.PlayOneShot(boostSound);
+            speed = 12.5f;
+            SoundManager.instance5.playerBoost();
 
             btn.color = new Color32(colorNum, colorNum, colorNum, 255);
         }

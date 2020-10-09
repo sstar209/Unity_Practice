@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance5;
+
     private AudioSource musicPlayer;
     public AudioClip backgroundMusic;
+    public AudioClip shootSound;
+    public AudioClip boostSound;
+
+    void Awake()
+    {
+        if (!instance5) instance5 = this;
+    }
 
     void Start()
     {
         musicPlayer = GetComponent<AudioSource>();
-        readySound(backgroundMusic, musicPlayer);
-
+        bgm(backgroundMusic, musicPlayer);
     }
 
-    public static void readySound(AudioClip clip, AudioSource audioPlayer)
+    public static void bgm(AudioClip clip, AudioSource audioPlayer)
     {
         audioPlayer.Stop();
         audioPlayer.clip = clip;
@@ -23,4 +31,13 @@ public class SoundManager : MonoBehaviour
         audioPlayer.Play();
     }
 
+    public void playerShoot()
+    {
+        musicPlayer.PlayOneShot(shootSound);
+    }
+
+    public void playerBoost()
+    {
+        musicPlayer.PlayOneShot(boostSound);
+    }
 }
