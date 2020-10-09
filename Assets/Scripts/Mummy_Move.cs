@@ -43,8 +43,6 @@ public class Mummy_Move : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.instance.isPlay)
-        {
             var statue = GameObject.FindGameObjectWithTag("STATUE");
             targetTr = statue.GetComponent<Transform>();
 
@@ -52,8 +50,7 @@ public class Mummy_Move : MonoBehaviour
             Monster_Agent = GetComponent<NavMeshAgent>();
             Monster_Agent.autoBraking = false;
             animator = GetComponent<Animator>();
-            Monster_Agent.speed = 3.3f;
-        }
+            Monster_Agent.speed = 3.3f;    
     }
 
     //플레이어의 위치를 매개변수로 받아 몬스터의 목표 위치를 플레이어 위치로 선정하는 함수

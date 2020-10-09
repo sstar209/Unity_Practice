@@ -71,8 +71,10 @@ public class HeroEnergy : MonoBehaviour
 
     void Update()
     {
+        //체력이 0이되면 게임오버
         if(curHp <= 0)
         {
+            //ScoreManager.instance3.SaveTS();
             GameManager.instance.GameOver();
         }
     }

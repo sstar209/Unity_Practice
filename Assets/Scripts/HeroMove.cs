@@ -38,8 +38,7 @@ public class HeroMove : MonoBehaviour
 
     public void OnMissileShootDown()
     {
-        if(GameManager.instance.isPlay)
-        {
+
             //미사일 발사시 발사 모션 진행
             mAvatar.SetTrigger("Fire");
 
@@ -49,21 +48,19 @@ public class HeroMove : MonoBehaviour
          
             //공격 시 효과음 재생
             playerSound.PlayOneShot(shootSound);
-        }
+        
     }
 
     public void OnMissileShootUp()
     {
-        if(GameManager.instance.isPlay)
-        {
+
             Instantiate(Hero_Missile, missile_pos.position, missile_pos.rotation);
-        }
+        
     }
 
     void Update()
     {
-        if(GameManager.instance.isPlay)
-        {
+
             mAvatar.SetFloat("Speed", (h * h + v * v));
 
             if (h != 0f && v != 0f)
@@ -94,7 +91,7 @@ public class HeroMove : MonoBehaviour
                 colorCha = false;
                 StartCoroutine("Change");
             }
-        }
+        
     }
 
     //colorNum == 쿨타임!
@@ -111,7 +108,7 @@ public class HeroMove : MonoBehaviour
 
     public void OnBoosterBtnDown()
     {
-        if(GameManager.instance.isPlay && speed < 5.1f && colorNum == 255)
+        if(speed < 5.1f && colorNum == 255)
         {
             colorNum = 125;
 

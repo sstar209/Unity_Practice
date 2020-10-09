@@ -71,8 +71,6 @@ public class Boss_Move2 : MonoBehaviour
 
     void Start()
     {
-        if(GameManager.instance.isPlay)
-        {
             nv = GetComponent<NavMeshAgent>();
             anim = GetComponent<Animator>();
 
@@ -84,9 +82,7 @@ public class Boss_Move2 : MonoBehaviour
             var statue = GameObject.FindGameObjectWithTag("STATUE");  //추적할 목표를 찾자
             targetTr = statue.GetComponent<Transform>();              //추적할 목표를 지정
 
-            anim.SetTrigger(hashWalk);                                //걷는 애니메이션
-
-        }
+            anim.SetTrigger(hashWalk);                                //걷는 애니메이션       
     }
 
     void OnCollisionEnter(Collision coll1)
@@ -135,5 +131,13 @@ public class Boss_Move2 : MonoBehaviour
         if (nv.isPathStale) return;
         nv.destination = pos;
         nv.isStopped = false;
+    }
+
+    private void Update()
+    {
+        if (GameManager.instance.endGame == true)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

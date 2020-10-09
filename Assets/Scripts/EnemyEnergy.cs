@@ -42,7 +42,7 @@ public class EnemyEnergy : MonoBehaviour
     {
         if (curHp <= 0)
         {
-            GameManager.instance.AddScore(1);
+            ScoreManager.instance3.AddScore(1);
 
             Destroy(this.gameObject);
         }

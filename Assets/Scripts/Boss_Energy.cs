@@ -46,9 +46,7 @@ public class Boss_Energy : MonoBehaviour
     {
         if (curHp <= 0)
         {
-            GameManager.instance.AddScore(50);
-
-            GameManager.instance.GameOver();
+            ScoreManager.instance3.AddScore(50);
         }
     }
 }

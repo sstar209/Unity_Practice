@@ -42,7 +42,7 @@ public class Mummy_Energy : MonoBehaviour
     {
         if(curHp <= 0)
         {
-            GameManager.instance.AddScore(5);
+            ScoreManager.instance3.AddScore(5);
 
             Destroy(this.gameObject);
         }

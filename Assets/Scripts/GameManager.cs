@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //어디서나 접근할 수 있도록 static(정적)으로 선언
 
-    public Text scoreText;
-    public int score = 0;           //적을 죽인 횟수
     public int pickUpStar = 0;      //별을 먹은 갯수
     public Transform starPos;       //별의 위치
     public GameObject starParticle; //별 파티클
@@ -20,33 +19,23 @@ public class GameManager : MonoBehaviour
     public GameObject starFourText; //별4개 텍스트
     public GameObject starFiveText; //별5개 텍스트
 
-    public delegate void OnPlay();
-    public OnPlay onPlay;
-
-    public bool isPlay = false;
-    public GameObject playBtn;
+    public bool isPause = false;
+    public GameObject EndGame;
+    public bool endGame = false;
 
     void Awake()
     {
         if (!instance) instance = this;
+    }
 
+    void Start()
+    {
         starOneText.SetActive(false);
         starTwoText.SetActive(false);
         starThreeText.SetActive(false);
         starFourText.SetActive(false);
         starFiveText.SetActive(false);
-    }
-
-    //적을 죽일 수 +1
-    public void AddScore(int num)
-    {
-        score += num;
-        scoreText.text = "Score : " + score;
-
-        if( score > 3)
-        {
-            //GameOver();
-        }
+        EndGame.SetActive(false);
     }
 
     //별을 먹을 시 +1
@@ -104,19 +93,26 @@ public class GameManager : MonoBehaviour
         Destroy(starFiveText, 3.0f);
     }
 
-    //start버튼 클릭
-    public void PlayBtnCilck()
+    //일시정지
+    public void GamePause()
     {
-        playBtn.SetActive(false);
-        isPlay = true;
-        onPlay.Invoke();
+        isPause = !isPause;
+        if(isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 
-    //게임 오버 시
+    //게임오버 시 씬 전환
     public void GameOver()
     {
-        playBtn.SetActive(true);
-        isPlay = false;
-        onPlay.Invoke();
+        GamePause();
+        EndGame.SetActive(true);
+        endGame = true;
     }
 } 

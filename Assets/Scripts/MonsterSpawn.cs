@@ -12,7 +12,7 @@ public class MonsterSpawn : MonoBehaviour
 
     void Start()
     {
-        GameManager.instance.onPlay += PlayGame;
+        PlayGame();
     }
 
     void PlayGame()
