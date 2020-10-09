@@ -7,6 +7,7 @@ public enum BTNType
     Play,
     Guide,
     Record,
+    Retry,
     Quit
 }
 

@@ -115,4 +115,11 @@ public class GameManager : MonoBehaviour
         EndGame.SetActive(true);
         endGame = true;
     }
+
+    public void GameRestart()
+    {
+        GamePause();
+        EndGame.SetActive(false);
+        endGame = false;
+    }
 } 

@@ -14,29 +14,29 @@ public class ScoreManager : MonoBehaviour
     private int savedScore = 0;
     private string KeyString = "High Score";
 
-    public Text lastText;
+    public Text lastScoreText;
     private int lastScore = 0;
 
     void Awake()
     {
         if (!instance3) instance3 = this;
-
+        /*
         savedScore = PlayerPrefs.GetInt(KeyString, 0);
         highScoreText.text = "High Score : " + savedScore;
+        */
     }
 
     public void AddScore(int num)
     {
+        //인게임 스코어 업데이트
         score += num;
         scoreText.text = "Score : " + score;
-        //lastText.text = "Score : " + score;
     }
 
     //점수가 갱신될때마다 highscore 점수 표시
     void Update()
     {
-        //lastScore = score;
-
+        //점수 세이브
         if(score > savedScore)
         {
             PlayerPrefs.SetInt(KeyString, score);
@@ -50,6 +50,14 @@ public class ScoreManager : MonoBehaviour
 
     public void LoadTS()
     {
+        
+    }
 
+    public void GameOverScore()
+    {
+        lastScore = score;
+        lastScoreText.text = "Score : " + score;
+        savedScore = PlayerPrefs.GetInt(KeyString, 0);
+        highScoreText.text = "High Score : " + savedScore;
     }
 }

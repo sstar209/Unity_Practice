@@ -30,6 +30,11 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case BTNType.Record:
 
                 break;
+
+            case BTNType.Retry:
+                SceneManager.LoadScene("Demo");
+                break;
+
             case BTNType.Quit:
                 SceneManager.LoadScene("Title");
                 break;
@@ -45,5 +50,4 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         buttonScale.localScale = defaultScale;
     }
-
 }

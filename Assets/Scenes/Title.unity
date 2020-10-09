@@ -1095,8 +1095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592f6f13d4e25e42b7229f3e671dfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  score: 0
   pickUpStar: 0
   starPos: {fileID: 0}
   starParticle: {fileID: 0}
@@ -1105,7 +1103,9 @@ MonoBehaviour:
   starThreeText: {fileID: 0}
   starFourText: {fileID: 0}
   starFiveText: {fileID: 0}
-  playBtn: {fileID: 0}
+  isPause: 0
+  EndGame: {fileID: 0}
+  endGame: 0
 --- !u!4 &1534295977
 Transform:
   m_ObjectHideFlags: 0
