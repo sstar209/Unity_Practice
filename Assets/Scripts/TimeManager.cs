@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
+    public static TimeManager instance4;
+
     public Text timerText;
 
     public float time;  //흐르는 총 시간
@@ -14,6 +16,23 @@ public class TimeManager : MonoBehaviour
 
     private string timeText1;
     private string timeText2;
+
+    //최단 시간
+    public Text highTimeText;
+    private float savedTime = 55555f;
+    private string TimeString = "High Time";
+
+    //게임 오버 시 경과 시간
+    public Text lastTimeText;
+    private float lastTime = 0;
+
+    private void Awake()
+    {
+        if (!instance4) instance4 = this;
+
+        savedTime = PlayerPrefs.GetFloat(TimeString, 0);
+        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + " : " + msec;
+    }
 
     private void Start()
     {
@@ -65,5 +84,22 @@ public class TimeManager : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    void Update()
+    {
+        if (time < savedTime)
+        {
+            PlayerPrefs.SetFloat(TimeString, time);
+        }
+    }
+
+    //게임 클리어 시 저장된 시간 불러오기
+    public void GameClearTime()
+    {
+        lastTime = time;
+        lastTimeText.text = timeText1 + min + timeText2 + sec + " : " + msec;
+        savedTime = PlayerPrefs.GetFloat(TimeString, 0);
+        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + " : " + msec;
     }
 }

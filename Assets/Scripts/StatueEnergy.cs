@@ -66,13 +66,14 @@ public class StatueEnergy : MonoBehaviour
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
+        StauteDie();
     }
 
-    void Update()
+    void StauteDie()
     {
         if (curHp <= 0)
         {
-            GameManager.instance.GameOver();
+            GameManager.instance.gameFail();
         }
     }
 }

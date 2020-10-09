@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public GameObject starFiveText; //별5개 텍스트
 
     public bool isPause = false;
-    public GameObject EndGame;
+    public GameObject GameClear;
+    public GameObject GameFail;
     public bool endGame = false;
 
     void Awake()
@@ -35,7 +36,8 @@ public class GameManager : MonoBehaviour
         starThreeText.SetActive(false);
         starFourText.SetActive(false);
         starFiveText.SetActive(false);
-        EndGame.SetActive(false);
+        GameClear.SetActive(false);
+        GameFail.SetActive(false);
     }
 
     //별을 먹을 시 +1
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
     public void GamePause()
     {
         isPause = !isPause;
-        if(isPause)
+        if (isPause)
         {
             Time.timeScale = 0f;
         }
@@ -108,18 +110,28 @@ public class GameManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 
-    //게임오버 시 씬 전환
-    public void GameOver()
+    //게임클리어 실패 시 전용 패널 활성화
+    public void gameFail()
     {
         GamePause();
-        EndGame.SetActive(true);
+        GameFail.SetActive(true);
         endGame = true;
     }
 
+    //게임 클리어시 전용 패널 활성화
+    public void gameClear()
+    {
+        GamePause();
+        GameClear.SetActive(true);
+        endGame = true;
+    }
+
+    //게임 재시작
     public void GameRestart()
     {
         GamePause();
-        EndGame.SetActive(false);
+        GameFail.SetActive(false);
+        GameClear.SetActive(false);
         endGame = false;
     }
 } 

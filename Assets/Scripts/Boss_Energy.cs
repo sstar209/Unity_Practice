@@ -8,8 +8,8 @@ public class Boss_Energy : MonoBehaviour
     [SerializeField]
     private Slider hpBar;
 
-    private float maxHp = 77;
-    private float curHp = 77;
+    private float maxHp = 7;
+    private float curHp = 7;
 
     void Start()
     {
@@ -40,13 +40,17 @@ public class Boss_Energy : MonoBehaviour
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
+        BossDie();
     }
 
-    void Update()
+
+    void BossDie()
     {
         if (curHp <= 0)
         {
-            ScoreManager.instance3.AddScore(50);
+            TimeManager.instance4.GameClearTime();
+            ScoreManager.instance3.GameClearScore();
+            GameManager.instance.gameClear();
         }
     }
 }

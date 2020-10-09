@@ -8,7 +8,7 @@ public class Boss_Move2 : MonoBehaviour
 {
     private NavMeshAgent nv;
     public Transform targetTr;
-    public int boss_Energy = 77;
+    public int boss_Energy = 7;
     private WaitForSeconds wfs;
     public Vector3 targetPosition;
 

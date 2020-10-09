@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,15 +68,14 @@ public class HeroEnergy : MonoBehaviour
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
+        PlayerDie();
     }
 
-    void Update()
+    void PlayerDie()
     {
-        //체력이 0이되면 게임오버
-        if(curHp <= 0)
+        if (curHp <= 0)
         {
-            ScoreManager.instance3.GameOverScore();
-            GameManager.instance.GameOver();
+            GameManager.instance.gameFail();
         }
     }
 }

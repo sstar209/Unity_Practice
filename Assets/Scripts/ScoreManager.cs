@@ -7,23 +7,26 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance3;
 
+    //현재 점수
     public Text scoreText;
     public int score = 0;
 
+    //최고 점수
     public Text highScoreText;
     private int savedScore = 0;
-    private string KeyString = "High Score";
+    private string ScoreString = "High Score";
 
+    //게임 오버 시 최종 점수
     public Text lastScoreText;
     private int lastScore = 0;
 
     void Awake()
     {
         if (!instance3) instance3 = this;
-        /*
-        savedScore = PlayerPrefs.GetInt(KeyString, 0);
+
+        savedScore = PlayerPrefs.GetInt(ScoreString, 0);
         highScoreText.text = "High Score : " + savedScore;
-        */
+
     }
 
     public void AddScore(int num)
@@ -33,31 +36,20 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score : " + score;
     }
 
-    //점수가 갱신될때마다 highscore 점수 표시
     void Update()
     {
-        //점수 세이브
-        if(score > savedScore)
+        if (score > savedScore)
         {
-            PlayerPrefs.SetInt(KeyString, score);
+            PlayerPrefs.SetInt(ScoreString, score);
         }
     }
 
-    public void SaveTS()
-    {
-        PlayerPrefs.SetInt(KeyString, score);
-    }
-
-    public void LoadTS()
-    {
-        
-    }
-
-    public void GameOverScore()
+    //게임 클리어 시 저장된 점수 불러오기
+    public void GameClearScore()
     {
         lastScore = score;
         lastScoreText.text = "Score : " + score;
-        savedScore = PlayerPrefs.GetInt(KeyString, 0);
+        savedScore = PlayerPrefs.GetInt(ScoreString, 0);
         highScoreText.text = "High Score : " + savedScore;
     }
 }
