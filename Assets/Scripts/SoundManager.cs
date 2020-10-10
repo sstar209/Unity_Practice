@@ -6,10 +6,12 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance5;
 
-    private AudioSource musicPlayer;
-    public AudioClip backgroundMusic;
+    private AudioSource effectPlayer;
+
     public AudioClip shootSound;
     public AudioClip boostSound;
+    public AudioClip buttonSound;
+    public AudioClip starSound;
 
     void Awake()
     {
@@ -18,8 +20,12 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        musicPlayer = GetComponent<AudioSource>();
-        bgm(backgroundMusic, musicPlayer);
+        effectPlayer = GetComponent<AudioSource>();
+    }
+
+    public void SetEffectVolume(float volume)
+    {
+        effectPlayer.volume = volume;
     }
 
     public static void bgm(AudioClip clip, AudioSource audioPlayer)
@@ -31,13 +37,27 @@ public class SoundManager : MonoBehaviour
         audioPlayer.Play();
     }
 
+    //총알 발사 시
     public void playerShoot()
     {
-        musicPlayer.PlayOneShot(shootSound);
+        effectPlayer.PlayOneShot(shootSound);
     }
 
+    //부스터 스킬 사용 시
     public void playerBoost()
     {
-        musicPlayer.PlayOneShot(boostSound);
+        effectPlayer.PlayOneShot(boostSound);
+    }
+    
+    //UI 버튼 클릭 시
+    public void buttonClick()
+    {
+        effectPlayer.PlayOneShot(buttonSound);
+    }
+
+    //별 획득 시
+    public void StarPickUp()
+    {
+        effectPlayer.PlayOneShot(starSound);
     }
 }

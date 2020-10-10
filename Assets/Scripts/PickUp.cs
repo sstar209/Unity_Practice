@@ -24,6 +24,7 @@ public class PickUp : MonoBehaviour
                     GameManager.instance.StarOneText();
                     GameManager.instance.AddStar(1);
                     GameManager.instance.ParticlePlay();
+                    SoundManager.instance5.StarPickUp();
 
                     Debug.Log("별 1개");
 
@@ -40,6 +41,7 @@ public class PickUp : MonoBehaviour
                     GameManager.instance.StarTwoText();
                     GameManager.instance.AddStar(1);
                     GameManager.instance.ParticlePlay();
+                    SoundManager.instance5.StarPickUp();
 
                     Debug.Log("별 2개");
 
@@ -56,6 +58,7 @@ public class PickUp : MonoBehaviour
                     GameManager.instance.StarThreeText();
                     GameManager.instance.AddStar(1);
                     GameManager.instance.ParticlePlay();
+                    SoundManager.instance5.StarPickUp();
 
                     Debug.Log("별 3개");
 
@@ -72,6 +75,7 @@ public class PickUp : MonoBehaviour
                     GameManager.instance.StarFourText();
                     GameManager.instance.AddStar(1);
                     GameManager.instance.ParticlePlay();
+                    SoundManager.instance5.StarPickUp();
 
                     Debug.Log("별 4개");
 
@@ -88,6 +92,7 @@ public class PickUp : MonoBehaviour
                     GameManager.instance.StarFiveText();
                     GameManager.instance.AddStar(1);
                     GameManager.instance.ParticlePlay();
+                    SoundManager.instance5.StarPickUp();
 
                     Debug.Log("별 5개");
 

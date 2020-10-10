@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameClear;
     public GameObject GameFail;
     public bool endGame = false;
+    public GameObject volume;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         starFiveText.SetActive(false);
         GameClear.SetActive(false);
         GameFail.SetActive(false);
+        volume.SetActive(false);
     }
 
     //별을 먹을 시 +1
@@ -109,6 +111,24 @@ public class GameManager : MonoBehaviour
         }
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+    
+    //옵션 키 누른 후 볼륨조절
+    public void VolumeControl()
+    {
+        SoundManager.instance5.buttonClick();
+        isPause = !isPause;
+        if (isPause)
+        {
+            Time.timeScale = 0f;
+            volume.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            volume.SetActive(false);
+        }
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
 
     //게임클리어 실패 시 전용 패널 활성화
     public void gameFail()
@@ -129,6 +149,7 @@ public class GameManager : MonoBehaviour
     //게임 재시작
     public void GameRestart()
     {
+        SoundManager.instance5.buttonClick();
         GamePause();
         GameFail.SetActive(false);
         GameClear.SetActive(false);

@@ -20,11 +20,14 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         switch(currentType)
         {
             case BTNType.Play:
-                SceneManager.LoadScene("Loading");
+                SoundManager.instance5.buttonClick();
+                Invoke("invokeLoading", 1.0f);
                 break;
 
             case BTNType.Guide:
-                SceneManager.LoadScene("Guide");
+                SoundManager.instance5.buttonClick();
+                TitleManager.instance6.guide();
+                buttonScale.localScale = defaultScale;
                 break;
 
             case BTNType.Record:
@@ -32,11 +35,13 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 break;
 
             case BTNType.Retry:
-                SceneManager.LoadScene("Demo");
+                SoundManager.instance5.buttonClick();
+                Invoke("invokeRetry", 1.0f);
                 break;
 
             case BTNType.Quit:
-                SceneManager.LoadScene("Title");
+                SoundManager.instance5.buttonClick();
+                TitleManager.instance6.main();
                 break;
         }
     }
@@ -50,4 +55,17 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         buttonScale.localScale = defaultScale;
     }
+
+    //효과음을 끝까지 재생시키기 위해 약간 지연시켜준다.
+    public void invokeLoading()
+    {
+        SceneManager.LoadScene("Loading");
+    }
+
+    public void invokeRetry()
+    {
+        SceneManager.LoadScene("Demo");
+    }
+
+
 }
