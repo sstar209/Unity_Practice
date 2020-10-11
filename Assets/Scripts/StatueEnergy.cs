@@ -11,8 +11,8 @@ public class StatueEnergy : MonoBehaviour
     [SerializeField]
     private Slider hpBar;
 
-    private float maxHp = 750;
-    private float curHp = 750;
+    private float maxHp = 400;
+    private float curHp = 400;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class StatueEnergy : MonoBehaviour
         {
             if (curHp > 0)
             {
-                curHp -= 0.05f;
+                curHp -= 0.1f;
             }
         }
 
@@ -38,7 +38,7 @@ public class StatueEnergy : MonoBehaviour
         {
             if(curHp > 0)
             {
-                curHp -= 0.15f;
+                curHp -= 0.2f;
             }
         }
 

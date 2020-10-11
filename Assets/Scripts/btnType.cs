@@ -31,7 +31,9 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 break;
 
             case BTNType.Record:
-
+                SoundManager.instance5.buttonClick();
+                TitleManager.instance6.record();
+                buttonScale.localScale = defaultScale;
                 break;
 
             case BTNType.Retry:
@@ -42,6 +44,7 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case BTNType.Quit:
                 SoundManager.instance5.buttonClick();
                 TitleManager.instance6.main();
+                buttonScale.localScale = defaultScale;
                 break;
         }
     }
@@ -64,6 +67,6 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void invokeRetry()
     {
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("Title");
     }
 }

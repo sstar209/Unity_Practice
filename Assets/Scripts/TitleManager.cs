@@ -12,6 +12,7 @@ public class TitleManager : MonoBehaviour
     public GameObject recordBtn;
     public GameObject guideImage;
     public GameObject quitBtn;
+    public GameObject recordBoard;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class TitleManager : MonoBehaviour
         recordBtn.SetActive(true);
         guideImage.SetActive(false);
         quitBtn.SetActive(false);
+        recordBoard.SetActive(false);
     }
 
     public void main()
@@ -30,6 +32,7 @@ public class TitleManager : MonoBehaviour
         guideBtn.SetActive(true);
         recordBtn.SetActive(true);
         guideImage.SetActive(false);
+        recordBoard.SetActive(false);
         quitBtn.SetActive(false);
     }
 
@@ -42,4 +45,12 @@ public class TitleManager : MonoBehaviour
         quitBtn.SetActive(true);
     }
 
+    public void record()
+    {
+        playBtn.SetActive(false);
+        guideBtn.SetActive(false);
+        recordBtn.SetActive(false);
+        recordBoard.SetActive(true);
+        quitBtn.SetActive(true);
+    }
 }

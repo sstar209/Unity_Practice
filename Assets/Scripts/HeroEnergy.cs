@@ -33,7 +33,7 @@ public class HeroEnergy : MonoBehaviour
         {
             if(curHp > 0)
             {
-                curHp -= 0.05f;
+                curHp -= 0.1f;
             }          
         }
 
@@ -41,7 +41,7 @@ public class HeroEnergy : MonoBehaviour
         {
             if (curHp > 0)
             {
-                curHp -= 0.15f;
+                curHp -= 0.2f;
             }
         }
 

@@ -18,11 +18,6 @@ public class TimeManager : MonoBehaviour
     private string timeText2;
     private string timeText3;
 
-    //최단 시간
-    public Text highTimeText;
-    private float savedTime = 55555f;
-    private string TimeString = "High Time";
-
     //게임 오버 시 경과 시간
     public Text lastTimeText;
     private float lastTime = 0;
@@ -30,9 +25,6 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         if (!instance4) instance4 = this;
-
-        savedTime = PlayerPrefs.GetFloat(TimeString, 0);
-        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + timeText3 + msec;
     }
 
     private void Start()
@@ -97,20 +89,10 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (time < savedTime)
-        {
-            PlayerPrefs.SetFloat(TimeString, time);
-        }
-    }
-
     //게임 클리어 시 저장된 시간 불러오기
     public void GameClearTime()
     {
         lastTime = time;
         lastTimeText.text = timeText1 + min + timeText2 + sec + timeText3 + msec;
-        savedTime = PlayerPrefs.GetFloat(TimeString, 0);
-        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + timeText3 + msec;
     }
 }

@@ -7,7 +7,7 @@ public class MonsterSpawn : MonoBehaviour
     public GameObject monsterRabbit;
     public GameObject monsterMummy;
 
-    public float timeGap = 3f;
+    public float timeGap = 2f;
     public Transform[] spawnPositions;  //spawn할 지점은 몇 군데?
 
     void Start()

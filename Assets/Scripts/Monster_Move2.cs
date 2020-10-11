@@ -28,14 +28,14 @@ public class Monster_Move2 : MonoBehaviour
             if (distance <= 2.0)
             {
                 //거리가 매우 가까운 상황
-                Monster_Agent.speed = 0.1f;
+                Monster_Agent.speed = 0.01f;
                 Monster_Agent.autoBraking = false;
 
             }
             else
             {
                 Monster_Agent.autoBraking = true;
-                Monster_Agent.speed = 2.2f;
+                Monster_Agent.speed = 3.0f;
                 ApproachTarget(targetTr.position);
             }
         }
@@ -46,11 +46,11 @@ public class Monster_Move2 : MonoBehaviour
         var statue = GameObject.FindGameObjectWithTag("STATUE");
         targetTr = statue.GetComponent<Transform>();
 
-        wfs = new WaitForSeconds(0.4f);
+        wfs = new WaitForSeconds(0.1f);
         Monster_Agent = GetComponent<NavMeshAgent>();
         Monster_Agent.autoBraking = false;
         animator = GetComponent<Animator>();
-        Monster_Agent.speed = 2.2f;
+        Monster_Agent.speed = 3.0f;
     }
 
     //플레이어의 위치를 매개변수로 받아 몬스터의 목표 위치를 플레이어 위치로 선정하는 함수
