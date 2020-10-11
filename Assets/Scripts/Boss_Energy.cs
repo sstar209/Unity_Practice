@@ -8,8 +8,8 @@ public class Boss_Energy : MonoBehaviour
     [SerializeField]
     private Slider hpBar;
 
-    private float maxHp = 7;
-    private float curHp = 7;
+    private float maxHp = 77;
+    private float curHp = 77;
 
     void Start()
     {

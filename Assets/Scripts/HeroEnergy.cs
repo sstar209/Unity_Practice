@@ -6,12 +6,19 @@ using UnityEngine.UI;
 
 public class HeroEnergy : MonoBehaviour
 {
+    public static HeroEnergy instance7;
+
     [SerializeField]
     private Slider hpBar;
 
     private float maxHp = 150;  //최대 체력
     private float curHp = 150;  //현재 체력
-  
+
+    void Awake()
+    {
+        if (!instance7) instance7 = this;
+    }
+
     //게임 시작 시 HP 꽉 채워서
     void Start()
     {
@@ -31,8 +38,6 @@ public class HeroEnergy : MonoBehaviour
             {
                 curHp = 0;
             }
-
-            HandleHp();
         }
 
         if (coll.collider.CompareTag("MUMMY"))
@@ -45,22 +50,6 @@ public class HeroEnergy : MonoBehaviour
             {
                 curHp = 0;
             }
-
-            HandleHp();
-        }
-
-        if (coll.collider.CompareTag("BOSS"))
-        {
-            if (curHp > 0)
-            {
-                curHp -= 2.5f;
-            }
-            else
-            {
-                curHp = 0;
-            }
-
-            HandleHp();
         }
     }
 
@@ -68,14 +57,21 @@ public class HeroEnergy : MonoBehaviour
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
-        PlayerDie();
     }
 
-    void PlayerDie()
+    public void PlayerBossDamage()
     {
+        curHp -= 15;       
+    }
+
+    private void Update()
+    {
+        HandleHp();
+
         if (curHp <= 0)
         {
             GameManager.instance.gameFail();
         }
     }
+
 }

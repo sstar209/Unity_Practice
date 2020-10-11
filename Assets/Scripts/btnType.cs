@@ -21,7 +21,7 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             case BTNType.Play:
                 SoundManager.instance5.buttonClick();
-                Invoke("invokeLoading", 1.0f);
+                Invoke("invokeLoading", 0.1f);
                 break;
 
             case BTNType.Guide:
@@ -36,7 +36,7 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             case BTNType.Retry:
                 SoundManager.instance5.buttonClick();
-                Invoke("invokeRetry", 1.0f);
+                Invoke("invokeRetry", 0.1f);
                 break;
 
             case BTNType.Quit:
@@ -66,6 +66,4 @@ public class btnType : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         SceneManager.LoadScene("Demo");
     }
-
-
 }

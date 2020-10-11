@@ -6,11 +6,18 @@ using UnityEngine.UI;
 
 public class StatueEnergy : MonoBehaviour
 {
+    public static StatueEnergy instance8;
+
     [SerializeField]
     private Slider hpBar;
 
     private float maxHp = 750;
     private float curHp = 750;
+
+    void Awake()
+    {
+        if (!instance8) instance8 = this;
+    }
 
     void Start()
     {
@@ -19,7 +26,6 @@ public class StatueEnergy : MonoBehaviour
 
     void OnCollisionStay(Collision coll3)
     {
-
         if (coll3.collider.CompareTag("RABBIT"))
         {
             if (curHp > 0)
@@ -30,8 +36,6 @@ public class StatueEnergy : MonoBehaviour
             {
                 curHp = 0;
             }
-
-            HandleHp();
         }
 
         if (coll3.collider.CompareTag("MUMMY"))
@@ -44,33 +48,23 @@ public class StatueEnergy : MonoBehaviour
             {
                 curHp = 0;
             }
-
-            HandleHp();
-        }
-
-        if (coll3.collider.CompareTag("BOSS"))
-        {
-            if (curHp > 0)
-            {
-                curHp -= 2.5f;
-            }
-            else
-            {
-                curHp = 0;
-            }
-
-            HandleHp();
         }
     }
 
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
-        StauteDie();
     }
 
-    void StauteDie()
+    public void StatueBossDamage()
     {
+        curHp -= 15;
+    }
+
+    private void Update()
+    {
+        HandleHp();
+
         if (curHp <= 0)
         {
             GameManager.instance.gameFail();

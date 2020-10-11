@@ -8,16 +8,19 @@ public class Boss_Move2 : MonoBehaviour
 {
     private NavMeshAgent nv;
     public Transform targetTr;
-    public int boss_Energy = 7;
+    public int boss_Energy = 77;
     private WaitForSeconds wfs;
     public Vector3 targetPosition;
 
     private Animator anim;
     private int hashWalk = Animator.StringToHash("Walk");
     private int hashFinish = Animator.StringToHash("isFinish");
+    private int hashIsAttack = Animator.StringToHash("isAttack");
     private int hashAttack = Animator.StringToHash("Attack");
     private int hashRun = Animator.StringToHash("Run");
     private int hashDie = Animator.StringToHash("Die");
+
+    public bool attacked = false;
 
     void OnEnable()
     {
@@ -38,9 +41,10 @@ public class Boss_Move2 : MonoBehaviour
             if (distance <= 4.0)
             {
                 //거리가 매우 가까운 상황
-                nv.speed = 0.1f;
+                nv.speed = 0.01f;
                 nv.autoBraking = false;
 
+                anim.SetBool(hashIsAttack, true);
                 anim.SetTrigger(hashAttack);
             }
 
@@ -50,6 +54,8 @@ public class Boss_Move2 : MonoBehaviour
                 nv.autoBraking = false;
                 nv.speed = 4.0f;
 
+                anim.SetBool(hashIsAttack, false);
+                anim.SetBool(hashFinish, true);
                 anim.SetTrigger(hashRun);
 
                 ApproachTarget(targetTr.position);        
@@ -71,38 +77,54 @@ public class Boss_Move2 : MonoBehaviour
 
     void Start()
     {
-            nv = GetComponent<NavMeshAgent>();
-            anim = GetComponent<Animator>();
+        nv = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
-            wfs = new WaitForSeconds(0.4f);
+        wfs = new WaitForSeconds(0.4f);
 
-            nv.speed = 2.0f;
-            nv.autoBraking = false;
+        nv.speed = 2.0f;
+        nv.autoBraking = false;
 
-            var statue = GameObject.FindGameObjectWithTag("STATUE");  //추적할 목표를 찾자
-            targetTr = statue.GetComponent<Transform>();              //추적할 목표를 지정
+        var statue = GameObject.FindGameObjectWithTag("STATUE");  //추적할 목표를 찾자
+        targetTr = statue.GetComponent<Transform>();              //추적할 목표를 지정
 
-            anim.SetTrigger(hashWalk);                                //걷는 애니메이션       
+        anim.SetTrigger(hashWalk);                                //걷는 애니메이션     
+        anim.SetBool(hashFinish, false);
+        anim.SetBool(hashIsAttack, false);
     }
 
-    void OnCollisionEnter(Collision coll1)
+    void OnCollisionEnter(Collision coll9)
     {
         //미사일과 접촉 시
-        if (coll1.collider.CompareTag("MISSILE"))
+        if (coll9.collider.CompareTag("MISSILE"))
         {
-            boss_Energy -= 1;
-            nv.isStopped = false;
             var player = GameObject.FindGameObjectWithTag("Player");
             targetTr = player.GetComponent<Transform>();
+            boss_Energy -= 1;
+            nv.isStopped = false;
+            anim.SetBool(hashFinish, true);
+            anim.SetTrigger(hashRun);
         }
-
+    }
+    
+    void OnCollisionStay(Collision coll1)
+    {
         //석상 접촉 시
         if (coll1.collider.CompareTag("STATUE"))
         {
             nv.speed = 0;
             nv.autoBraking = false;
             nv.isStopped = true;
+            anim.SetBool(hashIsAttack, true);
             anim.SetTrigger(hashAttack);
+
+            if (attacked)
+            {
+                Debug.Log("MinusHp");
+                anim.SetBool(hashFinish, false);
+                StatueEnergy.instance8.StatueBossDamage();
+                attacked = false;
+            }
         }
 
         //플레이어 접촉 시
@@ -114,7 +136,16 @@ public class Boss_Move2 : MonoBehaviour
             nv.speed = 0;
             nv.autoBraking = false;
             nv.isStopped = true;
+            anim.SetBool(hashIsAttack, true);
             anim.SetTrigger(hashAttack);
+
+            if (attacked)
+            {
+                Debug.Log("MinusHp");
+                anim.SetBool(hashFinish, false);
+                HeroEnergy.instance7.PlayerBossDamage();
+                attacked = false;
+            }
         }
 
         if (boss_Energy <= 0)
@@ -131,6 +162,16 @@ public class Boss_Move2 : MonoBehaviour
         if (nv.isPathStale) return;
         nv.destination = pos;
         nv.isStopped = false;
+    }
+
+    void AttackTrue()
+    {
+        attacked = true;
+    }
+
+    void AttackFalse()
+    {
+        attacked = false;
     }
 
     private void Update()
