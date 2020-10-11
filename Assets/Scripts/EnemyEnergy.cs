@@ -18,18 +18,12 @@ public class EnemyEnergy : MonoBehaviour
 
     private void OnCollisionEnter(Collision coll2)
     {
-        if(coll2.collider.CompareTag("MISSILE"))
+        if (coll2.collider.CompareTag("MISSILE"))
         {
             if (curHp > 0)
             {
                 curHp -= 1;
             }
-            else
-            {
-                curHp = 0;
-            }
-
-            HandleHp();
         }
     }
 
@@ -40,6 +34,8 @@ public class EnemyEnergy : MonoBehaviour
 
     void Update()
     {
+        HandleHp();
+
         if (curHp <= 0)
         {
             ScoreManager.instance3.AddScore(1);

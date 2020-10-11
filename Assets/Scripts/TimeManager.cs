@@ -16,6 +16,7 @@ public class TimeManager : MonoBehaviour
 
     private string timeText1;
     private string timeText2;
+    private string timeText3;
 
     //최단 시간
     public Text highTimeText;
@@ -31,7 +32,7 @@ public class TimeManager : MonoBehaviour
         if (!instance4) instance4 = this;
 
         savedTime = PlayerPrefs.GetFloat(TimeString, 0);
-        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + " : " + msec;
+        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + timeText3 + msec;
     }
 
     private void Start()
@@ -41,46 +42,56 @@ public class TimeManager : MonoBehaviour
 
         timeText1 = "Time 0";
         timeText2 = " : 0";
+        timeText3 = " : 0";
     }
 
     IEnumerator StopWatch()
     {
         while(true)
         {
-                time += Time.deltaTime;
+            time += Time.deltaTime;
 
-                //밀리초의 두자릿수만 나타내기 위해
-                //100을 곱한 뒤 정수형으로 변환시켜준다.
-                msec = (int)((time - (int)time) * 100);
+            //밀리초의 두자릿수만 나타내기 위해
+            //100을 곱한 뒤 정수형으로 변환시켜준다.
+            msec = (int)((time - (int)time) * 100);
 
-                //초는 나머지 연산자(%) 60을 기준으로
-                //마찬가지로 두자릿수만 나타내기 위해 같은 방법을
-                sec = (int)(time % 60);
+            //초는 나머지 연산자(%) 60을 기준으로
+            //마찬가지로 두자릿수만 나타내기 위해 같은 방법을
+            sec = (int)(time % 60);
 
-                //1분은 60초 이므로 60으로 나눠준다.
-                //분도 정수형으로 변환
-                min = (int)(time / 60 % 60);
+            //1분은 60초 이므로 60으로 나눠준다.
+            //분도 정수형으로 변환
+            min = (int)(time / 60 % 60);
+                
+            if(msec >= 10)
+            {
+                timeText3 = " : ";
+            }
+            else
+            {
+                timeText3 = " : 0";
+            }
 
-                if (sec >= 10)
-                {
-                    timeText2 = " : ";
-                }
-                else
-                {
-                    timeText2 = " : 0";
-                }
+            if (sec >= 10)
+            {
+                timeText2 = " : ";
+            }
+            else
+            {
+                timeText2 = " : 0";
+            }
 
-                if (min >= 10)
-                {
-                    timeText1 = "Time ";
-                }
-                else
-                {
-                    timeText1 = "Time 0";
-                }
+            if (min >= 10)
+            {
+                timeText1 = "Time ";
+            }
+            else
+            {
+                timeText1 = "Time 0";
+            }
 
-                //분,초,밀리초 자리배정
-                timerText.text = timeText1 + min + timeText2 + sec + " : " + msec;
+            //분,초,밀리초 자리배정
+            timerText.text = timeText1 + min + timeText2 + sec + timeText3 + msec;
 
             yield return null;
         }
@@ -98,8 +109,8 @@ public class TimeManager : MonoBehaviour
     public void GameClearTime()
     {
         lastTime = time;
-        lastTimeText.text = timeText1 + min + timeText2 + sec + " : " + msec;
+        lastTimeText.text = timeText1 + min + timeText2 + sec + timeText3 + msec;
         savedTime = PlayerPrefs.GetFloat(TimeString, 0);
-        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + " : " + msec;
+        highTimeText.text = "High " + timeText1 + min + timeText2 + sec + timeText3 + msec;
     }
 }

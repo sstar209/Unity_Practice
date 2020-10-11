@@ -27,30 +27,30 @@ public class Boss_Energy : MonoBehaviour
             if (curHp > 0)
             {
                 curHp -= 1;
-            }
-            else
-            {
-                curHp = 0;
-            }
-
-            HandleHp();
+            }          
         }
     }
 
     private void HandleHp()
     {
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
-        BossDie();
     }
 
 
-    void BossDie()
+    void Update()
     {
+        HandleHp();
+
         if (curHp <= 0)
         {
-            TimeManager.instance4.GameClearTime();
-            ScoreManager.instance3.GameClearScore();
-            GameManager.instance.gameClear();
+            Invoke("BossDieMotion", 5.0f);
         }
+    }
+
+    void BossDieMotion()
+    {
+        TimeManager.instance4.GameClearTime();
+        ScoreManager.instance3.GameClearScore();
+        GameManager.instance.gameClear();
     }
 }

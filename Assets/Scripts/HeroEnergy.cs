@@ -34,10 +34,6 @@ public class HeroEnergy : MonoBehaviour
             {
                 curHp -= 0.05f;
             }          
-            else
-            {
-                curHp = 0;
-            }
         }
 
         if (coll.collider.CompareTag("MUMMY"))
@@ -45,10 +41,6 @@ public class HeroEnergy : MonoBehaviour
             if (curHp > 0)
             {
                 curHp -= 0.15f;
-            }
-            else
-            {
-                curHp = 0;
             }
         }
     }

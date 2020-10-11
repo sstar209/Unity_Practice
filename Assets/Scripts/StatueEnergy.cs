@@ -32,10 +32,6 @@ public class StatueEnergy : MonoBehaviour
             {
                 curHp -= 0.05f;
             }
-            else
-            {
-                curHp = 0;
-            }
         }
 
         if (coll3.collider.CompareTag("MUMMY"))
@@ -43,10 +39,6 @@ public class StatueEnergy : MonoBehaviour
             if(curHp > 0)
             {
                 curHp -= 0.15f;
-            }
-            else
-            {
-                curHp = 0;
             }
         }
     }

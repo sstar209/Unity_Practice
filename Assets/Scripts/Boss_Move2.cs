@@ -147,14 +147,6 @@ public class Boss_Move2 : MonoBehaviour
                 attacked = false;
             }
         }
-
-        if (boss_Energy <= 0)
-        {
-            nv.speed = 0;
-            nv.autoBraking = false;
-            nv.isStopped = true;
-            anim.SetTrigger(hashDie);
-        }
     }
 
     void ApproachTarget(Vector3 pos)
@@ -174,8 +166,16 @@ public class Boss_Move2 : MonoBehaviour
         attacked = false;
     }
 
-    private void Update()
+    void Update()
     {
+        if (boss_Energy <= 0)
+        {
+            nv.speed = 0;
+            nv.autoBraking = false;
+            nv.isStopped = true;
+            anim.SetTrigger(hashDie);
+        }
+
         if (GameManager.instance.endGame == true)
         {
             Destroy(this.gameObject);

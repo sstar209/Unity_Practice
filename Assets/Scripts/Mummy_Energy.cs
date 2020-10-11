@@ -24,12 +24,6 @@ public class Mummy_Energy : MonoBehaviour
             {
                 curHp -= 1;
             }
-            else
-            {
-                curHp = 0;
-            }
-
-            HandleHp();
         }
     }
 
@@ -40,7 +34,9 @@ public class Mummy_Energy : MonoBehaviour
 
     void Update()
     {
-        if(curHp <= 0)
+        HandleHp();
+
+        if (curHp <= 0)
         {
             ScoreManager.instance3.AddScore(5);
 
