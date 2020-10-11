@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         GamePause();
         GameFail.SetActive(true);
         endGame = true;
+        MusicManager.instance10.failbgm();
     }
 
     //게임 클리어시 전용 패널 활성화
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
         GamePause();
         GameClear.SetActive(true);
         endGame = true;
+        MusicManager.instance10.clearbgm();
     }
 
     //게임 재시작

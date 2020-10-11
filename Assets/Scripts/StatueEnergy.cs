@@ -41,6 +41,11 @@ public class StatueEnergy : MonoBehaviour
                 curHp -= 0.15f;
             }
         }
+
+        if (curHp <= 0)
+        {
+            GameManager.instance.gameFail();
+        }
     }
 
     private void HandleHp()
@@ -53,13 +58,8 @@ public class StatueEnergy : MonoBehaviour
         curHp -= 15;
     }
 
-    private void Update()
+    void Update()
     {
         HandleHp();
-
-        if (curHp <= 0)
-        {
-            GameManager.instance.gameFail();
-        }
     }
 }

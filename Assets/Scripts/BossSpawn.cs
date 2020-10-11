@@ -13,12 +13,16 @@ public class BossSpawn : MonoBehaviour
     public GameObject bossHpBar;
     public GameObject bossImage;
 
+    public bool bossAppear = false;
+
     void Awake()
     {
         if (!instance2) instance2 = this;
 
         bossHpBar.SetActive(false);
         bossImage.SetActive(false);
+
+        bossAppear = false;
     }
 
     public void SpawnMonster()
@@ -31,5 +35,7 @@ public class BossSpawn : MonoBehaviour
 
         bossHpBar.SetActive(true);
         bossImage.SetActive(true);
+
+        bossAppear = true;
     }
 }

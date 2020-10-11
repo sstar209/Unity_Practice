@@ -96,6 +96,7 @@ public class PickUp : MonoBehaviour
 
                     Debug.Log("별 5개");
 
+                    MusicManager.instance10.bossbgm();
                     BossSpawn.instance2.SpawnMonster();
                     break;
                 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,11 @@ public class HeroEnergy : MonoBehaviour
                 curHp -= 0.15f;
             }
         }
+
+        if (curHp <= 0)
+        {
+            GameManager.instance.gameFail();
+        }
     }
 
     //선형보간 Mathf.Lerp(float A, float B, float t) -> A와 B사이의 t만큼의 값을 반환
@@ -56,14 +62,8 @@ public class HeroEnergy : MonoBehaviour
         curHp -= 15;       
     }
 
-    private void Update()
+    void Update()
     {
         HandleHp();
-
-        if (curHp <= 0)
-        {
-            GameManager.instance.gameFail();
-        }
     }
-
 }

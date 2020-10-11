@@ -36,7 +36,6 @@ public class Boss_Energy : MonoBehaviour
         hpBar.value = Mathf.Lerp(hpBar.value, (float)curHp / (float)maxHp, Time.deltaTime * 50);
     }
 
-
     void Update()
     {
         HandleHp();

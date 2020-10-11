@@ -52,7 +52,7 @@ public class Boss_Move2 : MonoBehaviour
             {
                 //추적 모드
                 nv.autoBraking = false;
-                nv.speed = 4.0f;
+                nv.speed = 4.25f;
 
                 anim.SetBool(hashIsAttack, false);
                 anim.SetBool(hashFinish, true);
@@ -64,7 +64,7 @@ public class Boss_Move2 : MonoBehaviour
             else
             {
                 //순찰 모드
-                nv.speed = 2.0f;
+                nv.speed = 2.5f;
                 var statue = GameObject.FindGameObjectWithTag("STATUE");
                 targetTr = statue.GetComponent<Transform>();
 
@@ -80,9 +80,9 @@ public class Boss_Move2 : MonoBehaviour
         nv = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        wfs = new WaitForSeconds(0.4f);
+        wfs = new WaitForSeconds(0.1f);
 
-        nv.speed = 2.0f;
+        nv.speed = 2.5f;
         nv.autoBraking = false;
 
         var statue = GameObject.FindGameObjectWithTag("STATUE");  //추적할 목표를 찾자
@@ -159,6 +159,7 @@ public class Boss_Move2 : MonoBehaviour
     void AttackTrue()
     {
         attacked = true;
+        SoundManager.instance5.DamageSound();
     }
 
     void AttackFalse()

@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip boostSound;
     public AudioClip buttonSound;
     public AudioClip starSound;
+    public AudioClip damageSound;
 
     void Awake()
     {
@@ -59,5 +60,11 @@ public class SoundManager : MonoBehaviour
     public void StarPickUp()
     {
         effectPlayer.PlayOneShot(starSound);
+    }
+
+    //피격 시
+    public void DamageSound()
+    {
+        effectPlayer.PlayOneShot(damageSound);
     }
 }
