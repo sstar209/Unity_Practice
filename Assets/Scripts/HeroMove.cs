@@ -106,6 +106,7 @@ public class HeroMove : MonoBehaviour
 
             speed = 12.5f;
             SoundManager.instance5.playerBoost();
+            GameManager.instance.boosParticlePlay();
 
             btn.color = new Color32(colorNum, colorNum, colorNum, 255);
         }

@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
     //어디서나 접근할 수 있도록 static(정적)으로 선언
 
     public int pickUpStar = 0;      //별을 먹은 갯수
-    public Transform starPos;       //별의 위치
-    public GameObject starParticle; //별 파티클
+    public Transform starPos;       //별 파티클 위치
+    public GameObject starParticle; //별 파티클 프리팹
+    public Transform boostPos;      //부스터 파티클 위치
+    public GameObject boostParticle;//부스터 파티클 프리팹
 
     public GameObject starOneText;  //별1개 텍스트
     public GameObject starTwoText;  //별2개 텍스트
@@ -49,10 +51,16 @@ public class GameManager : MonoBehaviour
     }
 
     //별을 먹을 시 파티클
-    public void ParticlePlay()
+    public void starParticlePlay()
     {
         GameObject imsy = Instantiate(starParticle, starPos.position, starPos.rotation);
         Destroy(imsy, 5.5f);
+    }
+
+    public void boosParticlePlay()
+    {
+        GameObject imsy2 = Instantiate(boostParticle, boostPos.position, boostPos.rotation);
+        Destroy(imsy2, 2.0f);
     }
 
     //첫번 쨰 별 문구

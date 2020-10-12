@@ -298,7 +298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 20, y: -135}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &890352691
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -322,16 +322,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 58b647c5b2ec4184e9a07a561cdf0644, type: 3}
-    m_FontSize: 32
+    m_FontSize: 64
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 45
+    m_MaxSize: 64
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'L o a d i n g . . . '
 --- !u!222 &890352692
@@ -377,8 +377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 500, y: 100}
+  m_AnchoredPosition: {x: 0, y: -135}
+  m_SizeDelta: {x: 650, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048674202
 MonoBehaviour:
@@ -809,7 +809,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -12.5}
-  m_SizeDelta: {x: 1280, y: 472}
+  m_SizeDelta: {x: 2048, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1528317362
 MonoBehaviour:
@@ -960,17 +960,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592f6f13d4e25e42b7229f3e671dfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  score: 0
   pickUpStar: 0
   starPos: {fileID: 0}
   starParticle: {fileID: 0}
+  boostPos: {fileID: 0}
+  boostParticle: {fileID: 0}
   starOneText: {fileID: 0}
   starTwoText: {fileID: 0}
   starThreeText: {fileID: 0}
   starFourText: {fileID: 0}
   starFiveText: {fileID: 0}
-  playBtn: {fileID: 0}
+  isPause: 0
+  GameClear: {fileID: 0}
+  GameFail: {fileID: 0}
+  endGame: 0
+  volume: {fileID: 0}
 --- !u!4 &1979425435
 Transform:
   m_ObjectHideFlags: 0

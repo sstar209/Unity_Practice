@@ -25,7 +25,7 @@ public class Mummy_Move : MonoBehaviour
 
             float distance = Vector3.Distance(this.transform.position, targetTr.position);
 
-            if (distance <= 2.0)
+            if (distance <= 1.0)
             {
                 //거리가 매우 가까운 상황
                 Monster_Agent.speed = 0.01f;
